@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        height: 380px;
+        width: 350px;
+        background-color: aliceblue;
+        box-shadow: 10px 10px 10px rgb(43, 42, 42);
+        margin-top: 50px;
+        margin-left: 500px ;
+        
+    }
+    input{
+        margin-top: 60px;
+        margin-left: 80px;
+        height: 20px;
+    }
+    button{
+        width: 45px;
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+    .btn-box{
+       margin-left: 50px;
+       margin-top: 90px;
+    }
+    button:hover{
+        background-color: rgb(221, 221, 218);
+    }
+    #text{
+        width: 200px;
+        border : 1px solid rgb(148, 143, 143);
+        position: relative;
+        top:60px;
+        left : 70px;
+        height: 25px;
+        background-color: rgb(252, 252, 252);
+    }
+    #result{
+        position: relative;
+        top:50px;
+        left : 70px; 
+        font-size: 20px;
+    }
+    @media only screen and (max-width:892px) {
+        
+        .container{
+            margin-left: 200px;
+        }      
+    }
+    @media screen and (max-width:538px) {
+      
+        .container{
+            margin-left: 100px;
+        }
+        
+    }
+    @media screen and (max-width :470) {
+       
+        .container{
+           width:200px
+        }
+        
+    }
+</style>
+<body>
+    <div class="container">
+
+        <p id="result"></p>
+        <div id="text"></div>
+        <div class="btn-box">
+
+            <button onclick="cal('1')">1</button>
+            <button onclick="cal('2')">2</button>
+            <button onclick="cal('3')">3</button>
+            <button onclick="cal('+')">+</button><br>
+            <button onclick="cal('4')">4</button>
+            <button onclick="cal('5')">5</button>
+            <button onclick="cal('6')">6</button>
+            <button onclick="cal('-')">-</button><br>
+            <button onclick="cal('7')">7</button>
+            <button onclick="cal('8')">8</button>
+            <button onclick="cal('9')">9</button>
+            <button onclick="cal('*')">*</button><br>
+            <button onclick="cal('/')">/</button>
+            <button onclick="cal('0')">0</button>
+            <button onclick="result('=')">=</button>
+
+        
+    </div>
+</div>
+<script>
+    function cal(n){
+        var t =document.getElementById("text").innerHTML;
+        document.getElementById("text").innerHTML = t+n;
+         
+    }
+    function result(){
+        var t = document.getElementById("text").innerHTML;
+        document.getElementById("result").innerHTML = eval(t);
+    }
+</script>
+</body>
+</html>

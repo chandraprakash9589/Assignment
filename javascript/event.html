@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="i1" onmouseover="alert('mouseover')">This is head</h1>
+    <button onclick="alert('button clicked')"> click me </button>
+
+    <p id="p1"></p>
+    <select name="" id="sn"onchange="changeName()">
+        <option value="">A</option>
+        <option value="">B</option>
+        <option value="">C</option>
+    </select>
+    <script>
+       function changeName(){
+       alert("name changed")
+       var t = document.getElementById("sn").innerHTML;
+       document.getElementById("p1").innerHTML = "name changed";
+       }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let obj = {
+        //     roll : 101,
+        //     name : "A",
+        // }
+        // console.log(obj.roll)
+        // let v = Object.values(obj)
+        // console.log(v)
+        // let k = Object.keys(obj)
+        // console.log(k)
+        // console.log(k[1])
+        // console.log(obj[name])
+        // console.log(JSON.stringify(obj))
+
+
+        let ob = {
+            fullname : function(){
+                return this.fname
+            }
+        }
+        let p1 = {
+            fname : "ABC",
+            lname : "XYZ",
+        }
+        var c = ob.fullname.call(p1)
+        console.log(c)
+
+
+        
+    </script>
+</body>
+</html>
