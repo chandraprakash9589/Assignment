@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       let arr = ["A","B"]
+       console.log(arr.toString())
+       console.log(arr.length)
+
+       let arr1 = [10,20,30,40]
+    //    for(var i=0; i<arr1.length; i++){
+    //     console.log(arr1[i])
+    //    }
+
+    //    for(var i of arr1){
+    //     console.log("by for of loop"+i)
+    //    }
+
+    arr1.forEach(function(v) {
+        console.log(v)
+        
+    });
+
+
+    arr2 = [1,2,3,4]
+    let t= arr2.map(item => item*2)
+      console.log(t)  
+
+    let f = arr2.filter(v => v%2==0)
+    console.log(f)
+
+
+    arr2.push(5)
+    console.log(arr2)
+    </script>
+
+</body>
+</html>
