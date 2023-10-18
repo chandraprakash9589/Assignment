@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation</title>
+    <style>
+        .parant{
+        width: 800px;
+        margin: auto;
+        height: 500px;
+        position: relative;
+        background-color: black;
+        }
+        .child{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: white;
+            animation-name: child;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            animation-delay: 1s;
+            animation-play-state: running;
+        }
+        @keyframes child{
+            0%{
+                top: 0px;
+                left: 0px;
+            }
+            25%{
+                top: 0px;
+                left: 700px;
+            }
+            50%{
+                top: 400px;
+                left: 700px;
+            }
+            75%{
+                top: 400px;
+                left: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parant">
+        <div class="child"></div>
+    </div>
+</body>
+</html>
