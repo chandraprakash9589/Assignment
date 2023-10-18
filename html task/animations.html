@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animations</title>
+    <style>
+        #box1{
+            width: 250px;
+            height: 250px;
+            background: rgb(140, 95, 185);
+            font-size: 225px;
+            text-align: center;
+
+            /* animation: mySlide;
+            animation-iteration-count: infinite;
+            animation-duration: 5s;
+            animation-play-state: running;
+            animation-delay: 0s;
+            animation-timing-function: linear; */
+
+            /* The order of the CSS applied below is 1.Duration 2.Timing function 3.Delay, 4.Iteration 5.animation */
+            animation: 3s linear 0s infinite running myColorChange;
+
+        }
+
+        /* #box1:hover{
+            animation: 3s linear 0s infinite running mySlide;
+        } */
+        #box1:active{
+            animation: 3s linear 0s infinite running ;
+        }
+        @keyframes mySlide{
+            from{margin-left: 0%;}
+            to{margin-left: 100%;}
+        }
+
+        @keyframes myRotate{
+            /* 100%{transform: rotateX(360deg)} */
+            /* 100%{transform: rotateY(360deg)} */
+            100%{transform: rotateZ(360deg)}
+        }
+
+        @keyframes myOpacity {
+            50%{opacity: 0;}
+        }
+
+        @keyframes myScale{
+            50%{transform: scale(0.5, 0.5);}
+        }
+
+        @keyframes myColorChange{
+            20%{background-color: brown;}
+            40%{background-color: gold;}
+            60%{background-color:chartreuse;}
+            80%{background-color: blue;}
+            100%{background-color: cadetblue;}
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">
+        Hi
+    </div>
+</body>
+</html>

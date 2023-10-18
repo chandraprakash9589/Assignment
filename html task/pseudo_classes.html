@@ -1,0 +1,55 @@
+<!-- pseudo-class = a keyword added to a selector that specifies a special state of the selected element(s) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pseudo-class</title>
+    <style>
+        a:link{
+            color: blueviolet;
+        }
+        a:visited{
+            color: red;
+        }
+        a:hover{
+            color: aqua;
+        }
+        a:active{
+            color: blue;
+        }
+        button:hover{
+            background-color: lightcoral;
+        }
+        button:active{
+            background-color: white;
+        }
+        /* li:nth-child(4){
+            background-color: yellow;
+        } */
+        /* li:nth-child(even){
+            background-color: cadetblue;
+        }
+        li:nth-child(odd){
+            background-color: powderblue;
+        } */
+        li:nth-child(3n){
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <a href="https:google.com">Google.com</a>
+    <button>Click me</button>
+    <ul>
+        <li>element 1</li>
+        <li>element 2</li>
+        <li>element 3</li>
+        <li>element 4</li>
+        <li>element 5</li>
+        <li>element 6</li>
+        <li>element 7</li>
+        <li>element 8</li>
+    </ul>
+</body>
+</html>
