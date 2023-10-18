@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #1abc9c;
+    overflow: hidden;
+
+}
+
+.container {
+    max-width: 440px;
+    padding: 0 20px;
+    margin: 170px auto;
+}
+
+.form-data {
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.form-data .title {
+    color: #fff;
+    background: #16a085;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 90px;
+}
+
+.form-data form {
+    padding: 30px 25px 25px 25px;
+}
+
+.form-data form .row {
+    height: 45px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.form-data form .row input {
+    height: 100%;
+    width: 100%;
+    padding-left: 60px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid lightgrey;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+form .row input:focus {
+    border-color: #3bcec6;
+    box-shadow: inset 0px 0px 2px 2px rgba(33, 31, 34, 0.349);
+}
+
+.form-data form .row i {
+    height: 100%;
+    width: 47px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: #16a085;
+    font-size: 18px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #16a085;
+}
+
+
+.form-data form .pass a {
+    color: #16a085;
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.form-data form .pass {
+    margin-bottom: 20px;
+}
+
+.form-data form .pass a:hover {
+    text-decoration: underline;
+}
+
+.form-data form .button input {
+    color: #fff;
+    background: #16a085;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 0px;
+    border: 1px solid #16a085;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+form .row-button input:hover{
+    background: #12876f;
+}
+
+.form-data form .sign-up {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+.form-data form .sign-up a {
+    color: #16a085;
+    text-decoration: none;
+}
+
+.form-data form .sign-up a:hover {
+    text-decoration: underline;
+}
