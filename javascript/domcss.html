@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mover {
+            height: 50px;
+            width: 100%;
+            background-color: rgb(226, 56, 26);
+            color: aliceblue;
+            text-align: center;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="p1">Hello css!</p>
+    <div id="mover" onmouseover="over()" onmouseout="out()">visit it</div>
+    <h1 id="h"></h1>
+    <button id="btn">click me</button>
+
+    <div id="div1">
+        <p>old para</p>
+    </div>
+
+    <script>
+        let para = document.createElement("p");
+        let node = document.createTextNode("this is new")
+        para.appendChild(node)
+        let ele = document.getElementById("div1");
+        ele.appendChild(para)
+        document.getElementById("p1").style.color = "red"
+        function over() {
+            document.getElementById("mover").innerHTML = "Thankyou"
+        }
+        function out() {
+            document.getElementById("mover").innerHTML = "visit it"
+        }
+        document.getElementById("btn").addEventListener('click', function () {
+            document.getElementById("h").innerHTML = Date()
+        })
+    </script>
+</body>
+
+</html>
