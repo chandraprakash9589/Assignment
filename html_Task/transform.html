@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transform</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #child {
+            position: absolute;
+            top: 125px;
+            color: rgb(245, 233, 233);
+            font-size: 70px;
+            left: 110px;
+            text-shadow: 3px 3px black;
+            animation: spin 5s reverse infinite;
+          
+            animation-iteration-count: infinite;
+
+        }
+        .main{
+            width: 170px;
+           
+            height: 170px;
+           
+            background-color: brown;
+            margin-top: 80px;
+            margin-left: 100px;
+            box-shadow: 5px 5px 10px 5px rgb(123, 123, 113);
+            /* transform: translate(100px); */
+            /* transform: translate3d(100px,100px,-100px); */
+            /* transform: translateX(10px); */
+            /* transform: translateY(10px); */
+            /* transform: skew(10deg,10deg);*/
+            /* transform: skewX(50deg);
+            transform: skewY(50deg); */
+            animation: spin 5s linear infinite;
+          
+            animation-iteration-count: infinite;
+        }
+        @keyframes spin{
+            0%{
+                transform:rotate(0deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="main"></div>
+        <div id="child">Hello</div>
+    </div>
+    <div>
+        <div class="main" ></div>
+        <div id="child" style=" position: absolute;
+        top: 370px;">Yash</div>
+    </div>
+    <!-- <div>
+        <div class="main" style="position: absolute; top: 200; left: 700;" ></div>
+        <div id="child" style=" position: absolute;
+        top: 230px;"><a href="">Sign in</a></div>
+    </div> -->
+</body>
+</html>
