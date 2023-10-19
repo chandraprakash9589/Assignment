@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops Practice</title>
+</head>
+
+<body>
+    <script>
+        //Que1
+        let marks = {
+            ram: 98,
+            harry: 70,
+            aakash: 77,
+            vijay: 90
+        }
+
+        for (let i = 0; i < Object.keys(marks).length; i++) {
+            console.log("The marks of " + Object.keys(marks)[i] + " are " + marks[Object.keys(marks)[i]])
+        }
+
+        //Output
+        //The marks of ram are 98
+        //The marks of harry are 70
+        //The marks of aakash are 77
+        //The marks of vijay are 90
+
+        //Que2 same que using for in loop
+        for (let key in marks){
+            console.log(" The marks of " + key + " are " + marks[key])
+        }
+
+        //Output
+        //The marks of ram are 98
+        //The marks of harry are 70
+        //The marks of aakash are 77
+        //The marks of vijay are 90
+
+        //Que3
+        let cn = 4
+        let i
+        while (i != cn) {
+            i = prompt("Enter a number")
+            console.log("Try again")
+        }
+        console.log("You have entered a correct number")
+    
+        //Que4
+        const mean = (a, b, c, d) => {
+            return (a + b + c + d) / 4
+        }
+
+        console.log(mean(4, 5, 6, 7))
+
+
+    </script> 
+</body>
+
+</html>
