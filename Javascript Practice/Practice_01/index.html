@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice</title>
+</head>
+
+<body>
+    <script>
+        //Question 1
+        let a = "Yash"
+        let b = 6
+        console.log(a + b)
+
+        //Question 2
+        console.log(typeof (a + b))
+
+        //Question 3
+        const obj = {
+            1: "Jay",
+            2: "Ritik",
+            3: "Sonu",
+        }
+        // obj = "Vikas"
+        //Question 4
+        obj["friend"] = "Raj"
+        console.log(obj)
+
+        //Question 5
+        const dict = {
+            happiness: "Feeling good about something",
+            sad: "Feeling bad about something",
+            appreciate: "recognize the full worth of"
+        }
+        console.log(dict.sad)
+        console.log(dict['sad'])
+
+        //Practice on Conditionals in JS
+
+        //Q1
+        // let age = prompt("Enter the age: ")
+        // age = Number.parseInt(age)
+        // if (age > 10 && age < 20) {
+        //     console.log("Your age lies between 10 and 20")
+        // }
+        // else{
+        //     console.log("Your age doesn't lies between 10 and 20")
+        // }
+
+        //Q2
+        // const Grade = prompt("Enter a Grade")
+        // switch (Grade) {
+        //     case 'A':
+        //         console.log("Excellient");
+        //         break ;
+        //     case 'B':
+        //         console.log("Very Good");
+        //         break;
+        //     case 'C':
+        //         console.log("Good");
+        //         break;
+        //     case 'D':
+        //         console.log("Fair");
+        //         break;
+        //     case 'E':
+        //         conso le.log("Poor");
+        //         break;
+        //     default:
+        //         console.log("Enter a valid grade")
+        // }
+        
+        //Q3
+        const num = 24
+        if (num%2==0 && num%3==0){
+            console.log("The Number 24 is divisible by 2 and 3")
+        }
+        else{
+            console.log("The Number 24 is not divisible by 2 and 3")
+        }
+
+        //Q4
+        const num1 = 24
+        if (num1%2==0 || num1%3==0){
+            console.log("The Number 24 is divisible by either 2 or 3")
+        }
+        else{
+            console.log("The Number 24 is not divisible by either 2 or 3")
+        }
+
+        //Q5
+        const umar = 24
+        console.log(umar>18? "You can drive": "You cannot drive");
+    </script>
+</body>
+
+</html>
