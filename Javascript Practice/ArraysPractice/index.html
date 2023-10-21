@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays Practice</title>
+</head>
+
+<body>
+    <script>
+        //Push method
+        let a = [7, 1, 2, 8]
+        console.log(a.push(9))
+
+        //Splice method
+        console.log(a.splice(2, 1, 23, 24))
+        console.log(a)
+
+        const months = ['Jan', 'March', 'April', 'June'];
+        months.splice(1, 0, 'Feb');
+        // Inserts at index 1
+        console.log(months);
+        // Expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+        months.splice(4, 1, 'May');
+        // Replaces 1 element at index 4
+        console.log(months);
+        // Expected output: Array ["Jan", "Feb", "March", "April", "May"]
+
+        //Sort method
+        let compare = (a, b) => {
+            return b - a
+        }
+        let num = [551, 22, 3, 14, 5, 6, 7, 8, 229]
+        num.sort(compare)
+        console.log(num)
+
+        //Question 1
+        // let arr = [1,2,3,4,5,6,7,44]
+        // let ab = prompt("Enter a number")
+        // ab = Number.parseInt(ab)
+        // arr.push(ab)
+        // console.log(arr)
+
+        //Question 2
+        // let arr = [1, 2, 3, 4, 5, 6, 7, 44]
+        // let ab
+        // do {
+        //     ab = prompt("Enter a number")
+        //     ab = Number.parseInt(ab)
+        //     arr.push(ab)
+        //     console.log(arr)
+        // }
+        // while (ab != 0);
+        // console.log(arr)
+
+        //Question 3
+        // let arr = [1, 20, 30, 40, 5, 6, 7, 44]
+        // let n = arr.filter((x) => {
+        //     return x % 10 == 0
+        // })
+        // console.log(n)
+
+        //Question 4
+        // let arr = [1, 20, 30, 40, 5, 6, 7, 44]
+        // let n = arr.map((x) => {
+        //     return x * x 
+        // })
+        // console.log(n)
+
+        //Question 5
+        let arr = [1, 2, 3, 4, 5]
+        let n = arr.reduce((x1, x2) => {
+            return x1 * x2
+        })
+        console.log(n)
+    </script>
+</body>
+
+</html>
