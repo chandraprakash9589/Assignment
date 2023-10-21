@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Methods Practice</title>
+</head>
+<body>
+    <script>
+        let name1 = "Yash"
+        let name2 = "Naman"
+        let name3 = name1.concat(" "+name2, " Yes")
+
+        //Question 1
+
+        //includes method
+        let sentence = "You are a painter";
+        let word = "painter";
+
+        console.log(`The word "${word}" ${sentence.includes(word) ? 'is' : 'is not'} in the sentence`);
+
+        //startsWith method
+
+        let str1 = "You are a smart boy";
+        
+        console.log(str1.startsWith('You'));
+        //true
+
+        console.log(str1.startsWith('You', 3));
+        //false
+
+        console.log(str1.endsWith('boy'));
+        //true
+
+        console.log(str1.endsWith('smart', 15));
+        //true
+
+        //Question 2
+        //toLowerCase
+        console.log(str1.toLowerCase())
+        console.log(str1.toUpperCase())
+
+        //Question 3
+        //slice
+        let str2 = "The amount is 1000";
+        let amount = Number.parseInt(str2.slice(14))
+        console.log(amount)
+        console.log(typeof amount)
+
+        //Question 4
+        let friend = "jayesh"
+        friend[3] = "R"
+        let newFriend = friend.replace('e', 'r')
+        console.log(friend) //friend is not changed, because sting is immutable
+        console.log(newFriend)
+    </script>
+</body>
+</html>
