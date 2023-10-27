@@ -1,0 +1,28 @@
+.container{
+  width:330px;
+  height: 430px;
+  margin-top: 100PX;
+  border: 1px solid grey;
+  box-shadow: 8px 8px 10px grey;
+  border-radius: 5px;
+}
+
+label{
+  margin-top: 7px;
+  margin-left: 20px;
+}
+input{
+  margin-left: 20px;
+}
+.btn{
+  margin-top: 20px;
+  background-color: blue;
+  margin-left: 20px;
+  color: aliceblue;
+  width: 100px;
+}
+.heading{
+  text-align: center;
+  color: brown;
+  margin-top: 3px;
+}
