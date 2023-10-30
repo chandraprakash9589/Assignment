@@ -1,14 +1,22 @@
 .container{
-  width:330px;
-  height: 430px;
-  margin-top: 100PX;
+  width:400px;
+  height: 500px;
+  margin-top: 70PX;
   border: 1px solid grey;
-  box-shadow: 8px 8px 10px grey;
+  box-shadow: 10px 10px 10px grey;
   border-radius: 5px;
+  background-color: rgb(251, 253, 253);
+}
+body{
+background-image: linear-gradient(rgb(208, 171, 211),rgb(194, 194, 175));
+}
+.error{
+  margin-left: 20px;
+  color: red;
 }
 
 label{
-  margin-top: 7px;
+  margin-top: 1px;
   margin-left: 20px;
 }
 input{
