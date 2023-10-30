@@ -14,7 +14,7 @@
 }
 
 .Container{
-  background-color: #685fb9;
+  background-color: #4577a7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -49,4 +49,9 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: medium;
+}
+
+.error-message{
+  color: red;
 }
