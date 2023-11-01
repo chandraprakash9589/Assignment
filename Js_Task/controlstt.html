@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control flow statement</title>
+</head>
+<body>
+    <script>
+        let a = (prompt("Enter any number: "));
+        console.log(a);
+        if (a==""){
+            alert("please Enter any number.")
+        }
+        else{
+            if (a == 0){
+                console.log(`${a} is equal to Zero.`);
+            }
+            else if(a<0){
+                console.log(`${a} is Negative number.`);
+            }
+            else if(a>0){
+                console.log(`${a} is Positive number.`);
+            }
+            else{
+                console.log(`${a} is not a Number.`);
+            }
+        }
+    </script>
+</body>
+</html>

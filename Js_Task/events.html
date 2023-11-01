@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+
+<body>
+    <h1>Events tutorial</h1>
+    <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptatibus quos distinctio voluptatem culpa,
+        dolorum dignissimos maiores illum velit minima necessitatibus quidem nulla quam enim error obcaecati. Molestiae
+        tempore sapiente et, blanditiis perspiciatis delectus? Cupiditate qui inventore a. Deleniti esse quasi aut
+        quidem dolor vero nihil obcaecati, possimus illo, officia incidunt, quisquam suscipit dolorum modi blanditiis
+        labore et nemo ipsa itaque voluptatem eum iusto quaerat debitis! Quo magnam iste, molestiae consequatur,
+        deserunt suscipit repellat nesciunt rerum repudiandae provident a architecto et, nostrum ad quod fugiat modi
+        officia illo ipsa quas sequi repellendus. Quis error commodi dolorum, nobis aut mollitia odit!
+    </p>
+    <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptatibus quos distinctio voluptatem culpa,
+        dolorum dignissimos maiores illum velit minima necessitatibus quidem nulla quam enim error obcaecati. Molestiae
+        tempore sapiente et, blanditiis perspiciatis delectus? Cupiditate qui inventore a. Deleniti esse quasi aut
+        quidem dolor vero nihil obcaecati, possimus illo, officia incidunt, quisquam suscipit dolorum modi blanditiis
+        labore et nemo ipsa itaque voluptatem eum iusto quaerat debitis! Quo magnam iste, molestiae consequatur,
+        deserunt suscipit repellat nesciunt rerum repudiandae provident a architecto et, nostrum ad quod fugiat modi
+        officia illo ipsa quas sequi repellendus. Quis error commodi dolorum, nobis aut mollitia odit!
+    </p>
+    <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptatibus quos distinctio voluptatem culpa,
+        dolorum dignissimos maiores illum velit minima necessitatibus quidem nulla quam enim error obcaecati. Molestiae
+        tempore sapiente et, blanditiis perspiciatis delectus? Cupiditate qui inventore a. Deleniti esse quasi aut
+        quidem dolor vero nihil obcaecati, possimus illo, officia incidunt, quisquam suscipit dolorum modi blanditiis
+        labore et nemo ipsa itaque voluptatem eum iusto quaerat debitis! Quo magnam iste, molestiae consequatur,
+        deserunt suscipit repellat nesciunt rerum repudiandae provident a architecto et, nostrum ad quod fugiat modi
+        officia illo ipsa quas sequi repellendus. Quis error commodi dolorum, nobis aut mollitia odit!
+    </p>
+    <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptatibus quos distinctio voluptatem culpa,
+        dolorum dignissimos maiores illum velit minima necessitatibus quidem nulla quam enim error obcaecati. Molestiae
+        tempore sapiente et, blanditiis perspiciatis delectus? Cupiditate qui inventore a. Deleniti esse quasi aut
+        quidem dolor vero nihil obcaecati, possimus illo, officia incidunt, quisquam suscipit dolorum modi blanditiis
+        labore et nemo ipsa itaque voluptatem eum iusto quaerat debitis! Quo magnam iste, molestiae consequatur,
+        deserunt suscipit repellat nesciunt rerum repudiandae provident a architecto et, nostrum ad quod fugiat modi
+        officia illo ipsa quas sequi repellendus. Quis error commodi dolorum, nobis aut mollitia odit!
+    </p>
+    <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptatibus quos distinctio voluptatem culpa,
+        dolorum dignissimos maiores illum velit minima necessitatibus quidem nulla quam enim error obcaecati. Molestiae
+        tempore sapiente et, blanditiis perspiciatis delectus? Cupiditate qui inventore a. Deleniti esse quasi aut
+        quidem dolor vero nihil obcaecati, possimus illo, officia incidunt, quisquam suscipit dolorum modi blanditiis
+        labore et nemo ipsa itaque voluptatem eum iusto quaerat debitis! Quo magnam iste, molestiae consequatur,
+        deserunt suscipit repellat nesciunt rerum repudiandae provident a architecto et, nostrum ad quod fugiat modi
+        officia illo ipsa quas sequi repellendus. Quis error commodi dolorum, nobis aut mollitia odit!
+    </p>
+    <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptatibus quos distinctio voluptatem culpa,
+        dolorum dignissimos maiores illum velit minima necessitatibus quidem nulla quam enim error obcaecati. Molestiae
+        tempore sapiente et, blanditiis perspiciatis delectus? Cupiditate qui inventore a. Deleniti esse quasi aut
+        quidem dolor vero nihil obcaecati, possimus illo, officia incidunt, quisquam suscipit dolorum modi blanditiis
+        labore et nemo ipsa itaque voluptatem eum iusto quaerat debitis! Quo magnam iste, molestiae consequatur,
+        deserunt suscipit repellat nesciunt rerum repudiandae provident a architecto et, nostrum ad quod fugiat modi
+        officia illo ipsa quas sequi repellendus. Quis error commodi dolorum, nobis aut mollitia odit!
+    </p>
+    <button id="button" onclick="hideShow()">Hide/Show</button><br><br>
+    <!-- Name : <input type="text" name="name" id="input"> -->
+
+    <form action="" id="form">
+        <table>
+            <tr>
+                <th>First Name</th>
+                <td><input type="text" name="fnm" id="inp"></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><input type="text" name="lnm" id="inp"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="submit" value="submit"></td>
+            </tr>
+        </table>
+    </form>
+
+    <br><br>
+    <div id="message"></div>
+    <script>
+        function hideShow(){
+            let para  = document.getElementById("para");
+            if (para.style.display !== 'none'){
+                para.style.display='none';
+                show = "hide?";
+            }
+            else{
+                para.style.display='block';
+                show = "show?"
+            }
+        }
+        myButton = document.getElementById("button");
+        myButton.addEventListener("click",function(){
+            alert(show);
+        });
+        // myPara = document.getElementById("para");
+        // myPara.addEventListener("mouseover",function(){
+        //     alert("mouseover event invoked...");
+        // });
+        // myPara = document.getElementById("para");
+        // myPara.addEventListener("mouseout",function(){
+        //     alert("mouseout event invoked...");
+        // });
+        // myPara = document.getElementById("para");
+        // myPara.addEventListener("mousemove",function(){
+        //     alert("mouseMove event invoked...");
+        // });
+        // myInput = document.getElementById("input");
+        // myInput.addEventListener("keydown",function(){
+        //     alert("Key Down event invoked...");
+        // });
+        // myInput = document.getElementById("input");
+        // myInput.addEventListener("keyup",function(){
+        //     alert("Key Up event invoked...");
+        // });
+        // myForm = document.getElementById("form");
+        // myForm.addEventListener("submit",function(){
+        //     alert("Form Submit event invoked...");
+        // });
+        // myForm = document.getElementById("form");
+        // myForm.addEventListener("input",function(){
+        //     alert("Form Input event invoked...");
+        // });
+        // myForm = document.getElementById("form");
+        // myForm.addEventListener("change",function(){
+        //     alert("Form Change event invoked...");
+        // });
+        // const myForm = document.getElementById("inp");
+        // const inputFocus = document.getElementById("focus");
+        // myForm.addEventListener('focus',function(event){
+        //     inputFocus.textContent = "Input field in the focus..."
+        // });
+        // const myForm = document.getElementById("inp");
+        // const inputMessage = document.getElementById("message");
+        // myForm.addEventListener('blur',function(event){
+        //     inputMessage.textContent = "Input field is Blur..."
+        // });
+        // const myForm = document.getElementById("inp");
+        // const inputMessage = document.getElementById("message");
+        // window.addEventListener('load',function(event){
+        //     alert("Window has been loaded...");
+        // });
+        window.addEventListener('scroll',function(event){
+            alert("Window has been scrolled...");
+        }); 
+        </script>
+</body>
+
+</html>

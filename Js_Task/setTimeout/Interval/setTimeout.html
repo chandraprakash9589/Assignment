@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JavaScript aur Jayprakash</h1>
+
+    <button id="btn">click</button>
+    <script>
+        // setInterval((myFunc)=>{
+        //     console.log("setInterval Called..");
+        // },2000)
+
+        const changeText = setTimeout(()=>{
+            document.querySelector('h1').innerHTML="JayPrakash aur JavaScript with Hitesh Choudhary"
+        },4000)
+
+        document.querySelector('#btn').addEventListener('click', function(){
+            clearTimeout(changeText)
+            console.log("Stopped")
+        })
+    </script>
+</body>
+</html>
