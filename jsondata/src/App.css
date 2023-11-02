@@ -1,0 +1,19 @@
+.jsontable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.jsontable td, .jsontable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.jsontable tr:nth-child(even){background-color: #f2f2f2;}
+
+.jsontable tr:hover {background-color: #ddd;}
+.jsontable tr th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
