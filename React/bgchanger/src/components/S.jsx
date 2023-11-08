@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './../App.css'
 
 class DetailsForm extends Component {
   constructor() {
@@ -23,7 +22,7 @@ class DetailsForm extends Component {
       newErrors.fname = 'Full Name is required';
       inputValid = false;
     }else if (!( /^[a-zA-Z]+\s+[a-zA-Z]+$/).test(fname)) {
-      newErrors.fname = 'Full Name must contains two word!';
+      newErrors.fname = 'Full Name is invalid';
       inputValid = false;
     }
     
@@ -31,28 +30,28 @@ class DetailsForm extends Component {
       newErrors.email = 'Email is required';
       inputValid = false;
     }else if (!/^\S+@gmail\.com$/.test(email)) {
-      newErrors.email = 'Email must contains @gmail.com';
+      newErrors.email = 'Email is invalid';
       inputValid = false;
     }
     
     if (city.trim() === '') {
       newErrors.city = 'City name is required';
       inputValid = false;
-    }else if (!/^[a-zA-Z]+$/.test(city)) {
+    }
+    if (mobile.length < 10 ) {
+      newErrors.mobile = '10 digit mobile number is required';
+      inputValid = false;
+    }else if (mobile.length > 10 ) {
+      newErrors.mobile = '10 digit mobile number is required';
+      inputValid = false;
+    }
+    
+
+    if (!/^[a-zA-Z]+$/.test(city)) {
       newErrors.city = 'City is invalid';
       inputValid = false;
     }
 
-    if (mobile.trim() === '') {
-      newErrors.mobile = 'Mobile Number is required';
-      inputValid = false;
-    }else if (mobile.length < 10 ) {
-      newErrors.mobile = 'Only 10 digit mobile number is Valid';
-      inputValid = false;
-    }else if (mobile.length > 10 ) {
-      newErrors.mobile = 'Only 10 digit mobile number is Valid';
-      inputValid = false;
-    }
     
     this.setState({ errors: newErrors });
     return inputValid;
@@ -92,9 +91,6 @@ class DetailsForm extends Component {
   render() {
     return (
       <>
-      <div style={{ color: "blue", fontSize: "40px", textAlign: "center", marginTop:"0"}}>
-          Registration Form
-        </div>
       <form  className="container mt-5" onSubmit={this.handleFormSubmit}>
                   <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">
@@ -106,7 +102,7 @@ class DetailsForm extends Component {
               value={this.state.fname}
               className="form-control"
               onChange={this.handleChange}
-              // id="exampleFormControlInput1"
+              id="exampleFormControlInput1"
               placeholder="e.g. Jay prakash Gupta"
             />
             <div className="error">{this.state.errors.fname}</div>
@@ -136,7 +132,7 @@ class DetailsForm extends Component {
               value={this.state.city}
               className="form-control"
               onChange={this.handleChange}
-              // id="exampleFormControlInput1"
+              id="exampleFormControlInput1"
               placeholder="e.g. Indore"
             />
             <div className="error">{this.state.errors.city}</div>
@@ -151,7 +147,7 @@ class DetailsForm extends Component {
               value={this.state.mobile}
               className="form-control"
               onChange={this.handleChange}
-              // id="exampleFormControlInput1"
+              id="exampleFormControlInput1"
               placeholder="e.g. 8878035012"
             />
             <div className="error">{this.state.errors.mobile}</div>
@@ -159,7 +155,7 @@ class DetailsForm extends Component {
           
 
           <div className="col-12">
-            <button className="btn btn-primary" type="submit">
+            <button onClick={this.handleClick} className="btn btn-primary" type="submit">
               Submit
             </button>
           </div>

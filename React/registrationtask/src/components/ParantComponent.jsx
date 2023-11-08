@@ -1,24 +1,62 @@
-import React, { Component } from 'react'
-import ShowDetail from './ShowDetail.jsx'
-import InputDetail from './InputDetail.jsx'
-import { BrowserRouter , Routes, Route, Link, Navigate } from "react-router-dom";
+import React, { Component } from "react";
+import DetailsForm from "./InputDetail";
+import ShowDetails from "./ShowDetail";
 
-export default class ParantComponent extends Component {
+class UserDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showForm: true,
+      fname: "",
+      email: "",
+      city: "",
+      mobile: "",
+      userData: {},
+    };
+  }
+
+  handleFormSubmit = (data) => {
+    this.setState({
+      showForm: false,
+      // userData: data,
+    });
+    console.log("userdata");
+    console.log(this.state.fname);
+    console.log("showed userdata");
+  };
+
+  handleCallback = (fname, email, city, mobile) => {
+    this.setState({
+      fname: fname,
+      email: email,
+      city: city,
+      mobile: mobile,
+    });
+    // console.log(this.state.fname)
+  };
   render() {
+    const { fname } = this.state;
+    const { email } = this.state;
+    const { city } = this.state;
+    const { mobile } = this.state;
     return (
       <div>
-        <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<InputDetail />}></Route>
-          <Route path='/users' element={<ShowDetail />}></Route>
-
-        </Routes>
-        
-        
-        </BrowserRouter>
-        {/* <ShowDetail />   */}
+        {this.state.showForm ? (
+          <DetailsForm
+            onSubmit={this.handleFormSubmit}
+            parentCallback={this.handleCallback}
+          />
+        ) : (
+          <ShowDetails
+            fname={fname}
+            email={email}
+            city={city}
+            mobile={mobile}
+          />
+        )}
       </div>
-
-    )
+    );
   }
 }
+
+export default UserDetails;
