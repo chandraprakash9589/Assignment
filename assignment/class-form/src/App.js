@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Main from "./components/Main";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Form from "./components/Form";
 import React, { Component } from 'react'
 import Utils from "./components/Utils";
@@ -17,9 +16,9 @@ export class App extends Component {
   render() {
     return (
       <div>
+        <Main/>
         <Routes>
-        <Route path="/" element={<Main />} >
-        </Route>
+        
         <Route path="/form" element={<Form/>} />
         <Route path="/show" element={<Utils/>}/>
       </Routes>

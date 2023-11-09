@@ -5,14 +5,18 @@ export class ShowDetails extends Component {
     super(props);
     
     this.state = {
-      userd: props.userdata,
+      userd: props.data,
     };
   }
-  
+ 
   render() {
+    const p = this.props.data
     console.log("lklklk",this.props.data)
+
     // console.log("show call", this.props.location);
     // console.log(Array.isArray(this.props.userdata));
+    const locdata = JSON.parse(localStorage.getItem(p))
+    console.log(locdata,"loc")
     return (
       <div>
         <table className="table table-striped table-hover">
@@ -24,10 +28,11 @@ export class ShowDetails extends Component {
               <th scope="col">city</th>
             </tr>
           </thead>
+          
           <tbody>
-            {this.props.data ? (
-              this.props.data.map((val, index) => {
-                console.log(this.props.data,"lklklk",val)
+            {locdata ? (
+              locdata.map((val, index) => {
+                console.log(val,'val')
 
                 return (
                   <tr key={index}>
@@ -38,10 +43,10 @@ export class ShowDetails extends Component {
                   </tr>
                 );
               })
-            ) : (
-              <p></p>
-            )}
-          </tbody>
+              ): <tr></tr>
+              
+            }
+            </tbody>
         </table>
       </div>
     );

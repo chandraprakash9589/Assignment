@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { NavLink, Navigate } from "react-router-dom";
-import ShowDetails from "./ShowDetails";
-import { Link } from "react-router-dom";
-import Main from "./Main";
+import { Navigate } from "react-router-dom";
 export class Form extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fname: "",
+      fname: "nik",
       email: "",
       mobile: "",
       city: "",
@@ -18,11 +15,13 @@ export class Form extends Component {
       userinfo: [],
       isRedirect: false,
     };
+    // console.log(this.state)
   }
   handleClick = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState((data) => ({ ...data, [name]: value }));
+    this.setState((d) => ({ ...d, [name]: value }));
+    
   };
   formValid = () => {
     const mobreg = /^((?!(0))[0-9])/;
@@ -64,39 +63,41 @@ export class Form extends Component {
     console.log(valid);
     return valid;
   };
-
   handleForm = (formData) => {
-    this.setState({ userinfo: this.state.data, ...formData });
-    // this.setState((formData) => ({ ...formData, [this.state.userinfo]: this.state.formData }));
+    this.setState((prevstate) => ({
+      ...prevstate, formData
+    }));
   };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    if (this.formValid()) {
-      const data = this.state.data;
-      data.push(this.state);
-      this.setState({ data });
-      // console.log(data);
-      console.log(this.state.fname);
-      // console.log(this.state.err)
-      // console.log(this.state.data)
-      // this.props.formsubmit(data);
-      this.handleForm(data);
+    // if (this.formValid()) {
+      
+      const {fname,data,count,
+      email,
+      mobile,
+      city} = this.state;
+
+      data.push({fname:fname,email:email,mobile:mobile,city:city})
+      console.log(data)
+    //   // this.setState({data: data });
+    //   this.handleForm(data);
+      // console.log(data, "data++++++++++++++++++ ");
+      localStorage.setItem(fname ,JSON.stringify( data
+     ));
       this.setState({
         isRedirect: true,
       });
-      // return <Navigate to="/search" state={{userinfo: this.state.userinfo}}/>
-    }
+    // }
   };
 
   render() {
-    const err = this.state.err;
-    const l = Object.keys(err).length;
     if (this.state.isRedirect) {
       return (
         <Navigate
           to="/show"
           replace={true}
-          state={{ userinfo: this.state.userinfo }}
+          state={{ userinfo : this.state.userinfo }}
         />
       );
     }
@@ -167,7 +168,7 @@ export class Form extends Component {
                 type="text"
                 className="form-control"
                 name="city"
-                value={this.state.city}
+                // value={this.state.data.city}
                 onChange={this.handleClick}
               />
               <div className="form-text error-message">

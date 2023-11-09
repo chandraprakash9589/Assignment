@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import Form from "./Form";
-import { Link, Navigate } from "react-router-dom";
-import ShowDetails from "./ShowDetails";
+import { Link} from "react-router-dom";
 
 export class Main extends Component {
   constructor(props) {
@@ -13,12 +11,11 @@ export class Main extends Component {
     };
   }
   
-  handleBtn = ()=>{
-    this.setState({res:true})
+  handleBtn = (e)=>{
+    e.preventDefault()
   }
  
   render() {
-    console.log(this.state.res);
     return (
       <div>
         {/* navbar start */}
