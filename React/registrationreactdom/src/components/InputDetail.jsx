@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './../App.css'
+import {Routes,Link} from 'react-router-dom'
 
 class DetailsForm extends Component {
   constructor() {
@@ -156,14 +157,10 @@ class DetailsForm extends Component {
             />
             <div className="error">{this.state.errors.mobile}</div>
           </div>
-          
-
           <div className="col-12">
-            <button className="btn btn-primary" type="submit">
-              Submit
+            <button className="btn btn-primary" type="submit"><Routes><Link to="/users">Submit</Link></Routes>
             </button>
           </div>
-
       </form>
       </>
     );

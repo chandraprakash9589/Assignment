@@ -1,15 +1,4 @@
-// import React from 'react';
 
-// const ShowDetails = ({ userData }) => {
-//   return (
-//     <div>
-//       <h1>{props.userData}</h1>
-//     </div>
-//   );
-// };
-
-// export default ShowDetails;
-// import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
 export default class ShowDetails extends Component {
@@ -42,7 +31,6 @@ export default class ShowDetails extends Component {
           Registered User
         </div>
         <hr />
-        {/* <div>{this.props.userData}</div> */}
         <table className="table text-center fs-6">
           <thead>
             <tr>
@@ -61,13 +49,7 @@ export default class ShowDetails extends Component {
                 <td>{item.mobile}</td>
               </tr>
             ))}
-            {/* <tr>
-              
-              <td>{this.props.userData.fname}</td>
-              <td>{this.props.userData.email}</td>
-              <td>{this.props.userData.city}</td>
-              <td>{this.props.userData.mobile}</td>
-            </tr> */}
+
           </tbody>
         </table>
       </>

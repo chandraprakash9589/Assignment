@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DetailsForm from "./InputDetail";
 import ShowDetails from "./ShowDetail";
+import { Router, Route, Routes } from "react-router-dom";
 
 class UserDetails extends Component {
   constructor(props) {
@@ -19,7 +20,6 @@ class UserDetails extends Component {
   handleFormSubmit = (data) => {
     this.setState({
       showForm: false,
-      // userData: data,
     });
     console.log("userdata");
     console.log(this.state.fname);
@@ -33,45 +33,37 @@ class UserDetails extends Component {
 
   Callback = (fname,email,city,mobile) => {
     const userData= {fname,email,city,mobile};
-    // this.setState({
-    //   // fname: fname,
-    //   // email: email,
-    //   // city: city,
-    //   // mobile: mobile,
-    //   // data: {fname,email,city,mobile},
-    //   userData : data
-    // }); 
-    // console.log("data1",data)
-    // console.log("userData",this.state.userData)
+
     this.setState((prevState) => ({
       data: [...prevState.data, userData],
       showForm: false,
     }));
-    // console.log(this.state.fname)
+  
   };
   render() {
-    // const { fname } = this.state;
-    // const { email } = this.state;
-    // const { city } = this.state;
-    // const { mobile } = this.state;
-    // let userData = []
+
     return (
       <div>
-        {this.state.showForm ? (
+        {this.state.showForm ? ( <Routes>
+          <Route exact path='/' element={
           <DetailsForm
             onSubmit={this.handleFormSubmit}
             parentCallback={this.Callback}
           />
-        ) : (
+          }></Route>
+        </Routes>
+
+        ) : (<Routes>
+          
+          <Route exact path='/users' element={
+         
           <ShowDetails
           onSubmit={this.back}
-            // fname={fname}
-            // email={email}
-            // city={city}
             showForm = {this.state.showForm}
-            // mobile={mobile}
             userData = {this.state.data}
           />
+          }></Route>
+        </Routes>
         )}
       </div>
     );

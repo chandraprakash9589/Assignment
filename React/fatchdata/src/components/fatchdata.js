@@ -22,9 +22,7 @@ function FatchData() {
     //     .then((data) => {
     //         setData(data)
     //     })
-    //     .catch((error) => console.log("ERROR: Data Not Found"))
-    
-    
+    //     .catch((error) => console.log("ERROR: Data Not Found"))    
     getUserData()
     },[])
 
