@@ -1,0 +1,15 @@
+.container {
+  margin: auto;
+}
+
+.container .error-message{
+  color: red;
+}
+
+.success-message{
+  color: green;
+}
+
+.container button{
+  margin-top: 10px;
+}
