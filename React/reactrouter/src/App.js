@@ -25,7 +25,7 @@ class App extends Component {
           <Link to="/contact">Contact Us</Link>
         </li>
         <li>
-          <Link to="/user/anil">Anil</Link>
+          <Link to="/user/anil">Ann il</Link>
         </li>
         <li>
           <Link to="/user/peter">Peter</Link>

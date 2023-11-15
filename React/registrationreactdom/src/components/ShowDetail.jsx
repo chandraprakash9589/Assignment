@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 
 export default class ShowDetails extends Component {
@@ -7,6 +6,7 @@ export default class ShowDetails extends Component {
   }
   back = () => {
     this.props.onSubmit();
+    window.history.pushState(null, null, "/registrationForm");
   };
   render() {
     const { userData } = this.props;
@@ -49,7 +49,6 @@ export default class ShowDetails extends Component {
                 <td>{item.mobile}</td>
               </tr>
             ))}
-
           </tbody>
         </table>
       </>

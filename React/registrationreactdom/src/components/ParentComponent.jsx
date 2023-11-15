@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DetailsForm from "./InputDetail";
 import ShowDetails from "./ShowDetail";
-import { Router, Route, Routes } from "react-router-dom";
+// import { Rou } from "react-router-dom";
 
 class UserDetails extends Component {
   constructor(props) {
@@ -13,57 +13,46 @@ class UserDetails extends Component {
       city: "",
       mobile: "",
       userData: null,
-      data : []
+      data: [],
     };
   }
 
   handleFormSubmit = (data) => {
     this.setState({
       showForm: false,
+      // userData: data,
     });
     console.log("userdata");
     console.log(this.state.fname);
     console.log("showed userdata");
   };
-  back=()=>{
+  back = () => {
     this.setState({
-      showForm:true
-    })
-  }
+      showForm: true,
+    });
+  };
 
-  Callback = (fname,email,city,mobile) => {
-    const userData= {fname,email,city,mobile};
-
+  Callback = (fname, email, city, mobile) => {
+    const userData = { fname, email, city, mobile };
     this.setState((prevState) => ({
       data: [...prevState.data, userData],
       showForm: false,
     }));
-  
   };
   render() {
-
     return (
       <div>
-        {this.state.showForm ? ( <Routes>
-          <Route exact path='/' element={
+        {this.state.showForm ? (
           <DetailsForm
             onSubmit={this.handleFormSubmit}
             parentCallback={this.Callback}
           />
-          }></Route>
-        </Routes>
-
-        ) : (<Routes>
-          
-          <Route exact path='/users' element={
-         
+        ) : (
           <ShowDetails
-          onSubmit={this.back}
-            showForm = {this.state.showForm}
-            userData = {this.state.data}
+            onSubmit={this.back}
+            showForm={this.state.showForm}
+            userData={this.state.data}
           />
-          }></Route>
-        </Routes>
         )}
       </div>
     );

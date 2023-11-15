@@ -1,15 +1,4 @@
-// import React from 'react';
 
-// const ShowDetails = ({ userData }) => {
-//   return (
-//     <div>
-//       <h1>{props.userData}</h1>
-//     </div>
-//   );
-// };
-
-// export default ShowDetails;
-// import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
 export default class ShowDetails extends Component {
