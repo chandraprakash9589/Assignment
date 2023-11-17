@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import {Link} from 'react-router-dom'
 export default class ShowToDoes extends Component {
   constructor(props) {
     super(props);
@@ -60,15 +61,17 @@ export default class ShowToDoes extends Component {
 
   back = ()=>{
     this.props.onSubmit();
-    window.history.pushState(null,null,"/")
+    // window.history.pushState(null,null,"/")
   }
 
   render() {
     const { userData } = this.props;
     const { editingIndex, updatedTitle, updatedDescription } = this.state;
 
+    console.log('TESTTTTTTs')
     return (
       <>
+      <Link to={'/'}>
       <button
           onClick={this.back}
           type="button"
@@ -76,6 +79,7 @@ export default class ShowToDoes extends Component {
         >
           &#8592; Back
         </button>
+      </Link>
         <h2 className="text-center mt-5">Show To-Do List</h2>
         <Table className="text-center mt-4" striped bordered hover variant="dark">
           <thead>
