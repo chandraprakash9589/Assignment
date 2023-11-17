@@ -1,4 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 .App{
   background-color: lightblue;
-  height: 617px;
+  height: 576px;
+  overflow: hidden;
 }

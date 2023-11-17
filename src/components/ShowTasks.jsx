@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Row, Col, Button } from "react-bootstrap";
+import { Table, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 class ShowTasks extends Component {
@@ -7,45 +7,70 @@ class ShowTasks extends Component {
     super(props);
     this.state = {
       todos: JSON.parse(localStorage.getItem("todos")) || [],
+      showEditModal: false,
+      editedTitle: "",
+      editedDescription: "",
+      editedIndex: null
     };
   }
+
+  handleEditTodo = (index) => {
+    this.setState({
+      showEditModal: true,
+      editedTitle: this.state.todos[index].title,
+      editedDescription: this.state.todos[index].description,
+      editedIndex: index
+    });
+  }
+  
+  handleCloseEditModal = () => {
+    this.setState({
+      showEditModal:false,
+      editedTitle: "",
+      editedDescription: "",
+      editedIndex: null
+    })
+  }
+
+  handleEditInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleEditSubmit = () => {
+    const { editedTitle, editedDescription, editedIndex } = this.state;
+    const updatedTodos = [...this.state.todos];
+    updatedTodos[editedIndex] = {
+      ...updatedTodos[editedIndex],
+      title: editedTitle,
+      description: editedDescription
+    }
+
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    this.setState({ todos: updatedTodos, showEditModal: false });
+    
+  };
+
+  handleDeleteTodo = (index) => {
+    let reduceTodo = [...this.state.todos];
+    reduceTodo.splice(index, 1);
+
+    localStorage.setItem("todos", JSON.stringify(reduceTodo));
+    this.setState({ todos: reduceTodo });
+  };
+
+  handleReadTodo = (index) => {
+    const updatedTodos = [...this.state.todos];
+    updatedTodos[index].isRead = !updatedTodos[index].isRead;
+
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    this.setState({ todos: updatedTodos });
+  };
+  
   render() {
     const todos = this.state.todos || [];
 
-    const handleDeleteTodo = (index) => {
-      let reduceTodo = [...this.state.todos];
-      reduceTodo.splice(index, 1);
-
-      localStorage.setItem("todos", JSON.stringify(reduceTodo));
-      this.setState({ todos: reduceTodo });
-    };
-
-    const handleEditTodo = (index) => {
-      const updatedTodos = this.state.todos.map((item, i) => {
-        if (i === index) {
-          const title = prompt("Enter Task Title");
-          const description = prompt("Enter Task Description");
-
-          return {
-            ...item,
-            title: title || item.title,
-            description: description || item.description,
-          };
-        }
-        return item;
-      });
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
-      this.setState({ todos: updatedTodos });
-    };
-
-    const handleReadTodo = (index) => {
-      const updatedTodos = [...this.state.todos];
-      updatedTodos[index].isRead = !updatedTodos[index].isRead;
-
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
-      this.setState({ todos: updatedTodos });
-    };
-    
     return (
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
@@ -73,10 +98,11 @@ class ShowTasks extends Component {
                   <tr key={index}>
                     <td>{item.title}</td>
                     <td>{item.description}</td>
+                    <>
                     <div>
                       <span>
                         <Button
-                          onClick={() => handleDeleteTodo(index)}
+                          onClick={() => this.handleDeleteTodo(index)}
                           variant="danger"
                           style={{ marginRight: "10px" }}
                         >
@@ -85,7 +111,7 @@ class ShowTasks extends Component {
                       </span>
                       <span>
                         <Button
-                          onClick={() => handleEditTodo(index)}
+                          onClick={() => this.handleEditTodo(index)}
                           variant="primary"
                           style={{ marginRight: "10px" }}
                         >
@@ -94,7 +120,7 @@ class ShowTasks extends Component {
                       </span>
                       <span>
                         <Button
-                          onClick={() => handleReadTodo(index)}
+                          onClick={() => this.handleReadTodo(index)}
                           variant="info"
                           style={{
                             backgroundColor: item.isRead ? "green" : null,
@@ -104,10 +130,49 @@ class ShowTasks extends Component {
                         </Button>
                       </span>
                     </div>
+                    </>
                   </tr>
                 ))}
             </tbody>
           </Table>
+          <Modal show={this.state.showEditModal} onHide={this.handleCloseEditModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Task</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group controlId="formEditTitle">
+                  <Form.Label>Todo Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Todo Title"
+                    name="editedTitle"
+                    value={this.state.editedTitle}
+                    onChange={this.handleEditInputChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formEditDescription">
+                  <Form.Label>Task Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    placeholder="Enter Task Description"
+                    name="editedDescription"
+                    value={this.state.editedDescription}
+                    onChange={this.handleEditInputChange}
+                  />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.handleCloseEditModal}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={this.handleEditSubmit}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Col>
       </Row>
     );

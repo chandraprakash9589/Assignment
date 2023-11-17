@@ -51,7 +51,6 @@ class TodoForm extends Component {
     }
 
     const newTodo = {
-      id: Math.random(),
       title: this.state.title,
       description: this.state.description,
     };
@@ -122,7 +121,6 @@ class TodoForm extends Component {
           </Button>
         </Link>
         </Form>
-       
       </>
     );
   }
