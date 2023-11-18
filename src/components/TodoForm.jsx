@@ -72,6 +72,14 @@ class TodoForm extends Component {
     });
   }
   render() {
+    const {
+      isEditMode,
+      editedTitle,
+      editedDescription,
+      handleEditSubmit,
+      handleCloseEditModal,
+      handleEditInputChange,
+    } = this.props;
     return (
       <>
         <Row
@@ -83,16 +91,17 @@ class TodoForm extends Component {
             fontWeight: "bolder",
           }}
         >
-          ToDo List
+          {isEditMode? "" : "ToDo List"}
         </Row>
         <Form className="container" style={{maxWidth: "480px"}}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
+              name="title"
               placeholder="Enter the title"
-              value={this.state.title}
-              onChange={(e) => this.updateInput("title", e.target.value)}
+              value = {isEditMode ? editedTitle : this.state.title}
+              onChange={(e) => isEditMode ? handleEditInputChange("editedTitle", e.target.value) : this.updateInput("title", e.target.value)}
             />
             <div style={{ color: "red", marginBottom: "10px" }}>
               {this.state.titleError}
@@ -102,22 +111,23 @@ class TodoForm extends Component {
             <Form.Label>Description</Form.Label>
             <Form.Control
               as="textarea"
+              name="description"
               placeholder="Enter description"
               rows={3}
-              value={this.state.description}
-              onChange={(e) => this.updateInput("description", e.target.value)}
+              value={isEditMode ? editedDescription : this.state.description}
+              onChange={(e) => isEditMode ? handleEditInputChange("editedDescription", e.target.value) : this.updateInput("description", e.target.value)}
             />
             <div style={{ color: "red", marginBottom: "10px" }}>
               {this.state.descriptionError}
             </div>
           </Form.Group>
-          <Button variant="primary" onClick={() => this.addToDo()} style={{padding: "6px 25px"}}>
-            Add
+          <Button variant="primary" onClick={() => isEditMode ? handleEditSubmit("editedTitle", "editedDescription", "editedIndex") : this.addToDo()} style={{padding: "6px 25px"}}>
+            {isEditMode? 'Save Changes': 'Add'}
           </Button>
           <br />
           <Link to="/showtasks">
-          <Button variant="success" style={{ marginTop: "10px" }}>
-            View Todos
+          <Button variant="success" onClick={()=> isEditMode ? handleCloseEditModal(): null} style={{ marginTop: "10px" }}>
+            {isEditMode ? 'Close' : 'View Todos'}
           </Button>
         </Link>
         </Form>

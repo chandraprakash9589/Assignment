@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Table, Row, Col, Button, Form, Modal } from "react-bootstrap";
+import { Table, Row, Col, Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import TodoForm from "./TodoForm";
 
 class ShowTasks extends Component {
   constructor(props) {
@@ -8,8 +9,6 @@ class ShowTasks extends Component {
     this.state = {
       todos: JSON.parse(localStorage.getItem("todos")) || [],
       showEditModal: false,
-      editedTitle: "",
-      editedDescription: "",
       editedIndex: null
     };
   }
@@ -32,9 +31,9 @@ class ShowTasks extends Component {
     })
   }
 
-  handleEditInputChange = (event) => {
+  handleEditInputChange = (key, value) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [key]: value
     })
   }
 
@@ -140,38 +139,16 @@ class ShowTasks extends Component {
               <Modal.Title>Edit Task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form>
-                <Form.Group controlId="formEditTitle">
-                  <Form.Label>Todo Title</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter Todo Title"
-                    name="editedTitle"
-                    value={this.state.editedTitle}
-                    onChange={this.handleEditInputChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formEditDescription">
-                  <Form.Label>Task Description</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter Task Description"
-                    name="editedDescription"
-                    value={this.state.editedDescription}
-                    onChange={this.handleEditInputChange}
-                  />
-                </Form.Group>
-              </Form>
+                <TodoForm show={this.state.showEditModal} onHide={this.handleCloseEditModal}
+                isEditMode = {this.state.showEditModal}
+                editedTitle = {this.state.editedTitle}
+                editedDescription={this.state.editedDescription}
+                editedIndex = {this.state.editedIndex}
+                handleEditSubmit={this.handleEditSubmit}
+                handleCloseEditModal={this.handleCloseEditModal}
+                handleEditInputChange={this.handleEditInputChange} 
+                />
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleCloseEditModal}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={this.handleEditSubmit}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
           </Modal>
         </Col>
       </Row>
