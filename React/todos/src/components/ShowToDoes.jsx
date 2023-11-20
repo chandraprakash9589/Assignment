@@ -1,59 +1,60 @@
 import React, { Component } from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
+import Modal from 'react-bootstrap/Modal';
+import Todos from "./TodoList";
 import Button from "react-bootstrap/Button";
 import {Link} from 'react-router-dom'
 export default class ShowToDoes extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: JSON.parse(localStorage.getItem("data")) || [],
       editingIndex: -1,
       updatedTitle: "",
       updatedDescription: "",
+      isOpen: false,
+      isRead:false,
+      
     };
   }
-  handleEditClick = (index) => {
-    const { title, description } = this.props.userData[index];
-    // console.log("index",index)
-    this.setState({
-      editingIndex: index,
-      updatedTitle: title,
-      updatedDescription: description,
-    });
-  };
 
-  handleUpdateClick = () => {
-    const { editingIndex, updatedTitle, updatedDescription } = this.state;
-    if (updatedTitle.trim() === "" || updatedDescription.trim() === "") {
-      alert("Title and description cannot be empty");
-      return;
-    }
-    if (this.props.onUpdate) {
-      this.props.onUpdate(editingIndex, updatedTitle, updatedDescription);
-    }
+  openModal = (index) => {
     this.setState({
-      editingIndex: -1,
-      updatedTitle: "",
-      updatedDescription: "",
+      isOpen: true,
+      updatedTitle:this.state.data[index].title,
+      updatedDescription:this.state.data[index].description,
+      editingIndex:index,
     });
-  };
+} 
+
+  closeModal = () => {
+    this.setState({
+      isOpen: false,
+      updatedTitle: "",
+      updatedDescription : "",
+      editingIndex : null,
+    });
+  }
 
   handleRemoveClick = (index) => {
     if (window.confirm("Are you sure you want to remove this todo?")) {
-      if (this.props.onRemove) {
-        this.props.onRemove(index);
-      }
+      const updatedData = [...this.state.data];
+      // console.log("index",index)
+      // console.log("updatedData",updatedData)
+      updatedData.splice(index, 1);
+      this.setState({ data: updatedData });
     }
   };
 
   handleMarkAsReadClick = (index) => {
-    if (this.props.onMarkAsRead) {
-      this.props.onMarkAsRead(index);
-    }
+    const updatedData = [...this.state.data];
+    updatedData[index].isRead = true;
+    this.setState({ data: updatedData });
   };
 
-  handleInputChange = (e) => {
-    const { name, value } = e.target;
+  handleInputChange = (name,value) => {
+    // const { name, value } = e.target;
     this.setState({
       [name]: value,
     });
@@ -64,11 +65,32 @@ export default class ShowToDoes extends Component {
     // window.history.pushState(null,null,"/")
   }
 
+  handleUpdate = (event)=>{
+    event.preventDefault()
+  
+    const {editingIndex,updatedTitle,updatedDescription}= this.state;
+    if (updatedTitle.trim() === "" || updatedDescription.trim() === "") {
+      alert("Title and description cannot be empty");
+      return;
+    }
+    const updatedData = [...this.state.data];
+    // history.pushState(null,null,"/showtodo")
+    updatedData[editingIndex] = {
+      ...updatedData[editingIndex],
+      title:updatedTitle,
+      description:updatedDescription
+    };
+    localStorage.setItem("data", JSON.stringify(updatedData));
+    this.setState({ data: updatedData});
+    console.log("updatedData",updatedData)
+  };
+  
+
+
   render() {
+    const data = this.state.data || [];
     const { userData } = this.props;
     const { editingIndex, updatedTitle, updatedDescription } = this.state;
-
-    console.log('TESTTTTTTs')
     return (
       <>
       <Link to={'/'}>
@@ -91,47 +113,26 @@ export default class ShowToDoes extends Component {
             </tr>
           </thead>
           <tbody>
-            {userData.map((item, index) => (
+            {data && data.map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>
-                  {editingIndex === index ? (
-                    <input
-                      type="text"
-                      name="updatedTitle"
-                      value={updatedTitle}
-                      onChange={this.handleInputChange}
-                    />
-                  ) : (
+                  
                     <span style={item.isRead ? styles.read : null}>
                       {item.title}
                     </span>
-                  )}
+                  
                 </td>
                 <td>
-                  {editingIndex === index ? (
-                    <input
-                      type="text"
-                      name="updatedDescription"
-                      value={updatedDescription}
-                      onChange={this.handleInputChange}
-                    />
-                  ) : (
                     <span style={item.isRead ? styles.read : null}>
                       {item.description}
                     </span>
-                  )}
                 </td>
                 <td className="text-center">
-                  {editingIndex === index ? (
-                    <Button variant="success" onClick={this.handleUpdateClick}>
-                      Update
-                    </Button>
-                  ) : (
                     <>
                       <Button
                         variant="secondary"
-                        onClick={() => this.handleEditClick(index)}
+                        onClick={() => this.openModal(index)}
                       >
                         Edit
                       </Button>
@@ -147,12 +148,31 @@ export default class ShowToDoes extends Component {
                       >
                         Done
                       </Button>
-                    </>
-                  )}
+                    </>  
                 </td>
               </tr>
             ))}
           </tbody>
+          <Modal show={this.state.isOpen} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit To-Do</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <Todos
+                isEdit = {this.state.isOpen}
+                updatedTitle = {this.state.updatedTitle}
+                updatedDescription={this.state.updatedDescription}
+                editingIndex = {this.state.editingIndex}
+                handleInputChange={this.handleInputChange} 
+                onUpdate={this.handleUpdate} 
+                />
+            </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.closeModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
         </Table>
       </>
     );
