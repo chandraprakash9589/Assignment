@@ -1,61 +1,127 @@
 import React, { Component } from "react";
-import { ListGroup, Button, Form } from "react-bootstrap";
-export class Todolist extends Component {
+import { Button, Table } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
+import { Link } from "react-router-dom";
+import nodata from "../nodata.png";
+import Spinner from "react-bootstrap/Spinner";
+class Todolist extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      check : '',
+      list: JSON.parse(localStorage.getItem("todoList")) || [],
+      completedItems: [],
+      load: true,
     };
   }
-  handleCheck = ()=>{
-    this.setState({check:' todo has been completed'})
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ load: false });
+    }, 2000);
   }
+
+  handleCheck = (index) => {
+    const { completedItems } = this.state;
+    completedItems[index] = !completedItems[index];
+    this.setState({ completedItems });
+  };
+  handleDelete = (index) => {
+    const { list } = this.state;
+    const newlist = [...list];
+    newlist.splice(index, 1);
+    this.setState({
+      list: [...newlist],
+    });
+    localStorage.setItem("todoList", JSON.stringify(newlist));
+  };
+
   render() {
-    const { item, deleteItem, updateItem } = this.props;
-    return (
-      <div>
-        {item.map((listItem, i) => {
-          return (
-            <ListGroup as="ol" key={i}>
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold"style={{color:'blue'}}>  {listItem.title}</div>
-                  {listItem.desc} <br/>
-                 <span style={{color:'green'}}> {this.state.check}</span>
-                </div>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  style={{ marginRight: "0px" }}
-                  onClick={() => {
-                    deleteItem(i);
-                  }}
-                >
-                  delete
-                </Button>
-                <Button
-                className="btn-update"
-                  variant="danger"
-                  size="sm"
-                  style={{ marginLeft: "10px" }}
-                  onClick={() => {
-                    updateItem(i, listItem.title);
-                  }}
-                >
-                  update
-                </Button>
-                <Form.Check type="checkbox" style={{ marginLeft: "10px" }}  onClick={this.handleCheck}/>
-              </ListGroup.Item>
-            </ListGroup>
-          );
-        })
-        }
+    const { list, completedItems, load } = this.state;
+    if (list.length <= 0) {
+      return <div>
+      <Image
+        src={nodata}
+        rounded
+        style={{ height: "400px", marginLeft: "400px" }}
+      />
+    </div>;
+    } else {
+      return (
+        <div>
+          {
+            load ? (
+              <Spinner
+                animation="border"
+                variant="primary"
+                style={{ marginTop: "250px", marginLeft: "600px" }}
+              />
+            ) : (
+              <Table striped bordered hover style={{ marginTop: "40px" }}>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                    <th>Done</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {list.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.title}</td>
+                      <td>{item.desc}</td>
+                      <td>
+                        <Link to="/">
+                          <Button
+                            variant="success"
+                            size="sm"
+                            style={{ marginRight: "8px" }}
+                            onClick={() => this.props.handleUpdate(index)}
+                          >
+                            Update
+                          </Button>
+                        </Link>
+                      </td>
+                      <td>
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          style={{ marginRight: "8px" }}
+                          onClick={() => this.handleDelete(index)}
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          style={{ marginLeft: "10px" }}
+                          checked={completedItems[index] || false}
+                          onChange={() => this.handleCheck(index)}
+                        />
+                        <span style={{ color: "green" }}>
+                          {" "}
+                          {completedItems[index] ? "complete" : ""}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            )
+          // )  (
+          //   <div>
+          //     <Image
+          //       src={nodata}
+          //       rounded
+          //       style={{ height: "400px", marginLeft: "400px" }}
+          //     />
+          //   </div>
+          }
         </div>
-        )
+      );
+    }
   }
 }
 
