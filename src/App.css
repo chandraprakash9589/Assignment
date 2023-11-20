@@ -2,8 +2,9 @@
   margin: 0;
   padding: 0;
 }
+
 .App{
   background-color: lightblue;
-  height: 576px;
+  height: 630px;
   overflow: hidden;
 }

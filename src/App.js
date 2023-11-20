@@ -1,7 +1,7 @@
 import './App.css';
 import ShowTasks from './components/ShowTasks';
 import TodoForm from './components/TodoForm';
-import { Routes, Route, } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (

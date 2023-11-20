@@ -9,7 +9,7 @@ class ShowTasks extends Component {
     this.state = {
       todos: JSON.parse(localStorage.getItem("todos")) || [],
       showEditModal: false,
-      editedIndex: null
+      editedIndex: null,
     };
   }
 
@@ -18,24 +18,24 @@ class ShowTasks extends Component {
       showEditModal: true,
       editedTitle: this.state.todos[index].title,
       editedDescription: this.state.todos[index].description,
-      editedIndex: index
+      editedIndex: index,
     });
-  }
-  
+  };
+
   handleCloseEditModal = () => {
     this.setState({
-      showEditModal:false,
+      showEditModal: false,
       editedTitle: "",
       editedDescription: "",
-      editedIndex: null
-    })
-  }
+      editedIndex: null,
+    });
+  };
 
   handleEditInputChange = (key, value) => {
     this.setState({
-      [key]: value
-    })
-  }
+      [key]: value,
+    });
+  };
 
   handleEditSubmit = () => {
     const { editedTitle, editedDescription, editedIndex } = this.state;
@@ -43,12 +43,11 @@ class ShowTasks extends Component {
     updatedTodos[editedIndex] = {
       ...updatedTodos[editedIndex],
       title: editedTitle,
-      description: editedDescription
-    }
+      description: editedDescription,
+    };
 
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     this.setState({ todos: updatedTodos, showEditModal: false });
-    
   };
 
   handleDeleteTodo = (index) => {
@@ -66,7 +65,7 @@ class ShowTasks extends Component {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     this.setState({ todos: updatedTodos });
   };
-  
+
   render() {
     const todos = this.state.todos || [];
 
@@ -98,56 +97,59 @@ class ShowTasks extends Component {
                     <td>{item.title}</td>
                     <td>{item.description}</td>
                     <>
-                    <div>
-                      <span>
-                        <Button
-                          onClick={() => this.handleDeleteTodo(index)}
-                          variant="danger"
-                          style={{ marginRight: "10px" }}
-                        >
-                          Delete
-                        </Button>
-                      </span>
-                      <span>
-                        <Button
-                          onClick={() => this.handleEditTodo(index)}
-                          variant="primary"
-                          style={{ marginRight: "10px" }}
-                        >
-                          Edit
-                        </Button>
-                      </span>
-                      <span>
-                        <Button
-                          onClick={() => this.handleReadTodo(index)}
-                          variant="info"
-                          style={{
-                            backgroundColor: item.isRead ? "green" : null,
-                          }}
-                        >
-                          {item.isRead ? "Completed" : "Mark as Read"}
-                        </Button>
-                      </span>
-                    </div>
+                      <div>
+                        <span>
+                          <Button
+                            onClick={() => this.handleDeleteTodo(index)}
+                            variant="danger"
+                            style={{ marginRight: "10px" }}
+                          >
+                            Delete
+                          </Button>
+                        </span>
+                        <span>
+                          <Button
+                            onClick={() => this.handleEditTodo(index)}
+                            variant="primary"
+                            style={{ marginRight: "10px" }}
+                          >
+                            Edit
+                          </Button>
+                        </span>
+                        <span>
+                          <Button
+                            onClick={() => this.handleReadTodo(index)}
+                            variant="info"
+                            style={{
+                              backgroundColor: item.isRead && "green",
+                            }}
+                          >
+                            {item.isRead ? "Completed" : "Mark as Read"}
+                          </Button>
+                        </span>
+                      </div>
                     </>
                   </tr>
                 ))}
             </tbody>
           </Table>
-          <Modal show={this.state.showEditModal} onHide={this.handleCloseEditModal}>
+          <Modal
+            show={this.state.showEditModal}
+            onHide={this.handleCloseEditModal}
+          >
             <Modal.Header closeButton>
               <Modal.Title>Edit Task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <TodoForm show={this.state.showEditModal} onHide={this.handleCloseEditModal}
-                isEditMode = {this.state.showEditModal}
-                editedTitle = {this.state.editedTitle}
+              <TodoForm
+                isEditMode={this.state.showEditModal}
+                editedTitle={this.state.editedTitle}
                 editedDescription={this.state.editedDescription}
-                editedIndex = {this.state.editedIndex}
+                editedIndex={this.state.editedIndex}
                 handleEditSubmit={this.handleEditSubmit}
                 handleCloseEditModal={this.handleCloseEditModal}
-                handleEditInputChange={this.handleEditInputChange} 
-                />
+                handleEditInputChange={this.handleEditInputChange}
+              />
             </Modal.Body>
           </Modal>
         </Col>

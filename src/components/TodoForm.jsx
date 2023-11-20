@@ -1,49 +1,37 @@
 import React, { Component } from "react";
 import { Form, Button, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import { Link } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 
 class TodoForm extends Component {
-  componentDidMount() {
-    // Attach the event listener when the component mounts
-    window.addEventListener('beforeunload', this.handleBeforeUnload);
-  }
-
-  componentWillUnmount() {
-    // Remove the event listener when the component is about to unmount
-    window.removeEventListener('beforeunload', this.handleBeforeUnload);
-  }
-
-  handleBeforeUnload = () => {
-    // Clear localStorage before the page is unloaded (refreshed)
-    localStorage.removeItem('todos');
-  };
   constructor(props) {
     super(props);
     this.state = {
+      isRedirect: false,
       title: "",
       description: "",
       titleError: "",
       descriptionError: "",
     };
-} 
+  }
 
   updateInput(key, value) {
     this.setState({
       [key]: value,
-      [`${key}Error`]: ""
+      [`${key}Error`]: "",
     });
   }
 
   addToDo() {
-    if (this.state.title.trim() === "") {
+    const { title, description } = this.state;
+    if (title.trim() === "") {
       this.setState({
         titleError: "Please enter a title.",
       });
       return;
     }
 
-    if (this.state.description.trim() === "") {
+    if (description.trim() === "") {
       this.setState({
         descriptionError: "Please enter a description.",
       });
@@ -51,8 +39,8 @@ class TodoForm extends Component {
     }
 
     const newTodo = {
-      title: this.state.title,
-      description: this.state.description,
+      title: title,
+      description: description
     };
 
     //Retrieve existing todos from local storage
@@ -65,6 +53,7 @@ class TodoForm extends Component {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
 
     this.setState({
+      isRedirect: true,
       title: "",
       description: "",
       titleError: "",
@@ -91,17 +80,21 @@ class TodoForm extends Component {
             fontWeight: "bolder",
           }}
         >
-          {isEditMode? "" : "ToDo List"}
+          {isEditMode || "ToDo List"}
         </Row>
-        <Form className="container" style={{maxWidth: "480px"}}>
+        <Form className="container" style={{ maxWidth: "480px" }}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
               name="title"
               placeholder="Enter the title"
-              value = {isEditMode ? editedTitle : this.state.title}
-              onChange={(e) => isEditMode ? handleEditInputChange("editedTitle", e.target.value) : this.updateInput("title", e.target.value)}
+              value={isEditMode ? editedTitle : this.state.title}
+              onChange={(e) =>
+                isEditMode
+                  ? handleEditInputChange("editedTitle", e.target.value)
+                  : this.updateInput("title", e.target.value)
+              }
             />
             <div style={{ color: "red", marginBottom: "10px" }}>
               {this.state.titleError}
@@ -115,21 +108,42 @@ class TodoForm extends Component {
               placeholder="Enter description"
               rows={3}
               value={isEditMode ? editedDescription : this.state.description}
-              onChange={(e) => isEditMode ? handleEditInputChange("editedDescription", e.target.value) : this.updateInput("description", e.target.value)}
+              onChange={(e) =>
+                isEditMode
+                  ? handleEditInputChange("editedDescription", e.target.value)
+                  : this.updateInput("description", e.target.value)
+              }
             />
             <div style={{ color: "red", marginBottom: "10px" }}>
               {this.state.descriptionError}
             </div>
           </Form.Group>
-          <Button variant="primary" onClick={() => isEditMode ? handleEditSubmit("editedTitle", "editedDescription", "editedIndex") : this.addToDo()} style={{padding: "6px 25px"}}>
-            {isEditMode? 'Save Changes': 'Add'}
+          <Button
+            variant="primary"
+            onClick={() =>
+              isEditMode
+                ? handleEditSubmit(
+                    "editedTitle",
+                    "editedDescription",
+                    "editedIndex"
+                  )
+                : this.addToDo()
+            }
+            style={{ padding: "6px 25px" }}
+          >
+            {isEditMode ? "Save Changes" : "Add"}
           </Button>
           <br />
           <Link to="/showtasks">
-          <Button variant="success" onClick={()=> isEditMode ? handleCloseEditModal(): null} style={{ marginTop: "10px" }}>
-            {isEditMode ? 'Close' : 'View Todos'}
-          </Button>
-        </Link>
+            <Button
+              variant="success"
+              onClick={() => isEditMode && handleCloseEditModal()}
+              style={{ marginTop: "10px" }}
+            >
+              {isEditMode ? "Close" : "View Todos"}
+            </Button>
+          </Link>
+          {this.state.isRedirect && <Navigate to="/showtasks"></Navigate>}
         </Form>
       </>
     );
