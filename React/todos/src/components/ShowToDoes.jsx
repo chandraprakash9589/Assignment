@@ -61,8 +61,8 @@ export default class ShowToDoes extends Component {
   };
 
   back = ()=>{
-    this.props.onSubmit();
-    // window.history.pushState(null,null,"/")
+    // this.props.onSubmit();
+    window.history.pushState(null,null,"/Add-todo")
   }
 
   handleUpdate = (event)=>{
@@ -93,13 +93,13 @@ export default class ShowToDoes extends Component {
     const { editingIndex, updatedTitle, updatedDescription } = this.state;
     return (
       <>
-      <Link to={'/'}>
+      <Link to={'/Add-todo'}>
       <button
           onClick={this.back}
           type="button"
-          className="btn btn-secondary mt-2 m-2"
+          className="btn btn-primary mt-2 m-2"
         >
-          &#8592; Back
+          &#8592; Add new-todo
         </button>
       </Link>
         <h2 className="text-center mt-5">Show To-Do List</h2>

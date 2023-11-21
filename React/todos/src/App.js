@@ -24,8 +24,8 @@ class App extends React.Component {
     <div>
     <Routes>
 
-    <Route exact path='/' element={<Todos />} />
-    <Route path='/showtodo' element={<ShowToDoes onSubmit={this.handleBack}/>} />
+    <Route exact path='/Add-todo' element={<Todos />} />
+    <Route path='/' element={<ShowToDoes onSubmit={this.handleBack}/>} />
   </Routes>
   </div>
 );

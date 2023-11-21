@@ -138,7 +138,7 @@ export default class Todos extends Component {
             {isEdit ? (
               ""
             ) : (
-              <Link to={"/showTodo"}>
+              <Link to={"/"}>
                 <Button variant="primary">Show To-Do</Button>
               </Link>
             )}
