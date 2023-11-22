@@ -1,30 +1,29 @@
+// import './App.css';
+// import { useState } from 'react';
 
-import './App.css';
-import { useState } from 'react';
-
-function App() {
-  const [counter, setCounter] = useState(10)
-  let addValue = () => {
-    if(counter < 20){
-      setCounter(counter + 1)
-    }
-  }
-  let removeValue = () => {
-    if(counter > 0){
-      setCounter(counter -1)
-    }
-  }
-  return (
-    <>
-      <div className="App">
-        <h1>Counter between 0 to 20</h1>
-        <h2>Value : {counter}</h2>
-        <button onClick={addValue}>Add Value</button><br />
-        <button onClick={removeValue}>Remove Value</button>
-      </div>
-    </>
-  );
-}
+// function App() {
+//   const [counter, setCounter] = useState(10)
+//   let addValue = () => {
+//     if(counter < 20){
+//       setCounter(counter + 1)
+//     }
+//   }
+//   let removeValue = () => {
+//     if(counter > 0){
+//       setCounter(counter -1)
+//     }
+//   }
+//   return (
+//     <>
+//       <div className="App">
+//         <h1>Counter between 0 to 20</h1>
+//         <h2>Value : {counter}</h2>
+//         <button onClick={addValue}>Add Value</button><br />
+//         <button onClick={removeValue}>Remove Value</button>
+//       </div>
+//     </>
+//   );
+// }
 
 // -----------------------------------------------------------------------
 
@@ -51,67 +50,70 @@ function App() {
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<Counter />);
 
-//---------------------------------------------------------------------------------- 
+//----------------------------------------------------------------------------------
 
-// import { useState, createContext, useContext } from "react";
-// import ReactDOM from "react-dom/client";
+// What is the use of useContext Hook?
+// Context provides a way to pass data or state through the component tree without having to pass props down manually through each nested component.
 
-// const UserContext = createContext();
+import { useState, createContext, useContext } from "react";
+import ReactDOM from "react-dom/client";
 
-// function Component1() {
-//   const [user, setUser] = useState("Jay prakash gupta");
+const UserContext = createContext();
 
-//   return (
-//     <>
-//      <UserContext.Provider value={user}>
-//       <h1>{`Hello ${user}!`}</h1>
-//       <Component2 />
-//      </UserContext.Provider>
-//     </>
-//   );
-// }
+function Component1() {
+  const [user, setUser] = useState("Jay prakash gupta");
 
-// function Component2() {
-//   return (
-//     <>
-//       <h1>Component 2</h1>
-//       <Component3 />
-//     </>
-//   );
-// }
+  return (
+    <>
+      <UserContext.Provider value={user}>
+        <h1>{`Hello ${user}!`}</h1>
+      </UserContext.Provider>
+      <Component2 />
+    </>
+  );
+}
 
-// function Component3() {
-//   return (
-//     <>
-//       <h1>Component 3</h1>
-//       <Component4 />
-//     </>
-//   );
-// }
+function Component2() {
+  return (
+    <>
+      <h1>Component 2</h1>
+      <Component3 />
+    </>
+  );
+}
 
-// function Component4() {
-//   return (
-//     <>
-//       <h1>Component 4</h1>
-//       <Component5 />
-//     </>
-//   );
-// }
+function Component3() {
+  return (
+    <>
+      <h1>Component 3</h1>
+      <Component4 />
+    </>
+  );
+}
 
-// function Component5() {
-//   const user = useContext(UserContext);
+function Component4() {
+  return (
+    <>
+      <h1>Component 4</h1>
+      <Component5 />
+    </>
+  );
+}
 
-//   return (
-//     <>
-//       <h1>Component 5</h1>
-//       <h2>{`Hello ${user} again!`}</h2>
-//     </>
-//   );
-// }
+function Component5() {
+  const user = useContext(UserContext);
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(<Component1 />);
+  return (
+    <>
+      <h1>Component 5</h1>
+      <h2>{`Hello ${user} again!`}</h2>
+    </>
+  );
+}
 
-// ------------------------------------------------------------------------------ 
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Component1 />);
 
-export default App;
+// ------------------------------------------------------------------------------
+
+export default Component1;

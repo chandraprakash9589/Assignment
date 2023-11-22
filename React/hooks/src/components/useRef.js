@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from "react";
 
-function AccessingElement(){
+function AccessingElement() {
   const elementRef = useRef();
 
-  useEffect(()=>{
+  useEffect(() => {
     const divElement = elementRef.current;
     console.log(divElement);
-  },[])
+  }, []);
   return (
     <div ref={elementRef}>
       <h1>This is an element...</h1>
