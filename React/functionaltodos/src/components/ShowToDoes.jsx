@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
 import Todos from "./TodoList";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
  
 const ShowToDoes = () => {
   const [state, setState] = useState({
-    data: JSON.parse(localStorage.getItem("data")) || [],
+    data: (localStorage.getItem("data")) ? JSON.parse(localStorage.getItem("data")) : [],
     editingIndex: -1,
     updatedTitle: "",
     updatedDescription: "",
@@ -16,6 +16,10 @@ const ShowToDoes = () => {
     isRead: false,
     isUpdated: false,
   });
+
+  useEffect(()=>{
+    localStorage.setItem('data',JSON.stringify(state.data))
+  },[state.data])
 
   const openModal = (index) => {
     setState({ 
@@ -43,7 +47,7 @@ const ShowToDoes = () => {
       const updatedData = [...state.data];
       updatedData.splice(index, 1);
       setState({ ...state, data: updatedData });
-      localStorage.setItem("data", JSON.stringify(updatedData));
+      // localStorage.setItem("data", JSON.stringify(updatedData));
     }
   };
 
@@ -51,7 +55,7 @@ const ShowToDoes = () => {
     const updatedData = [...state.data];
     updatedData[index].isRead = true;
     setState({ ...state, data: updatedData });
-    localStorage.setItem("data", JSON.stringify(updatedData));
+    // localStorage.setItem("data", JSON.stringify(updatedData));
   };
 
   const handleInputChange = (name, value) => {
@@ -75,7 +79,7 @@ const ShowToDoes = () => {
       title: updatedTitle,
       description: updatedDescription,
     };
-    localStorage.setItem("data", JSON.stringify(updatedData));
+    // localStorage.setItem("data", JSON.stringify(updatedData));
     setState({ ...state, isUpdated: true, data: updatedData });
   };
 
@@ -164,3 +168,4 @@ const ShowToDoes = () => {
 };
 
 export default ShowToDoes;
+
