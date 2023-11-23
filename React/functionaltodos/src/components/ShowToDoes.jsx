@@ -62,7 +62,7 @@ const ShowToDoes = () => {
       isUpdated: false,
     });
   };
-
+  console.log("show todo component called.....")
   const handleUpdate = (event) => {
     event.preventDefault();
     const { editingIndex, updatedTitle, updatedDescription } = state;
@@ -76,7 +76,6 @@ const ShowToDoes = () => {
       title: updatedTitle,
       description: updatedDescription,
     };
-    // localStorage.setItem("data", JSON.stringify(updatedData));
     setState({ ...state, isUpdated: true, data: updatedData });
   };
 
