@@ -1,91 +1,98 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Todoform(props) {
   const navigate = useNavigate();
-  const [name, setName] = useState({
+  const [form, setForm] = useState({
     title: "",
     desc: "",
     err: {},
-    edit: false,
     isRedirect: false,
     list: JSON.parse(localStorage.getItem("todobyhook")) || [],
     editIndex: null,
     editMode: false,
   });
 
-
   const handleChange = (e) => {
     const names = e.target.name;
     const value = e.target.value;
-    console.log('-------',names,value )
-    setName({ ...name, [names]: value });
-    console.log(name.err);
+    setForm((prevState) => ({ ...prevState, [names]: value }));
   };
+
+  const handleUpdate = useCallback((index) => {
+    const { list } = form;
+    const editData = list[index];
+    setForm({
+      ...form,
+      title: editData.title,
+      desc: editData.desc,
+      editMode: true,
+      editIndex: index,
+    });
+  }, []);
+
   useEffect(() => {
     const { index } = props;
     if (index !== undefined && index !== null) {
       handleUpdate(index);
     }
-  }, [name]);
-
-  const handleUpdate = (index) => {
-  
-    const { list } = name;
-
-    if (index !== undefined && index !== null) {
-      const editData = list[index];
-   
-      // setName({
-      //   editMode : true
-      // });
-      // const { title } = name;
-      if (name.title !== undefined) {
-        console.log("handleUpdate---------", editData.title);
-        // setName({title: editData.title,});
-        setName({ ...name, 'title': editData.title ,'desc' : editData.desc});
-      }
-
-      console.log(name, "nt");
-    }
-  };
+  }, []);
 
   const handleValid = () => {
-    const { err } = name;
+    const { err } = form;
 
-    if (name.title === "") {
+    if (form.title === "") {
       err.title = "Required";
     } else {
       err.title = "";
     }
-    if (name.desc === "") {
+    if (form.desc === "") {
       err.desc = "Required";
     } else {
       err.desc = "";
     }
-
-    console.log(err);
+    let valid = true;
+    Object.values(err).forEach((v) => {
+      v.length > 0 && (valid = false);
+    });
+    return valid;
   };
+  handleValid();
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { title, list } = name;
-    e.preventDefault();
-    const data = {
-      title: title,
-      desc: name.desc,
-    };
-    list.push(data);
-
-    setName({
-      title: "",
-      desc: "",
-      err: {},
-      isRedirect: true,
-    });
-    localStorage.setItem("todobyhook", JSON.stringify(name.list, data));
+    const { title, list, editMode, editIndex } = form;
+    if (handleValid()) {
+      const data = {
+        title: title,
+        desc: form.desc,
+      };
+      if (editMode) {
+        const updateList = [...list];
+        updateList[editIndex] = data;
+        setForm({
+          editIndex: null,
+          title: "",
+          desc: "",
+          err: {},
+          isRedirect: true,
+          list: updateList,
+        });
+        localStorage.setItem("todobyhook", JSON.stringify(updateList));
+      } else {
+        setForm({
+          title: "",
+          desc: "",
+          err: {},
+          isRedirect: true,
+          list: [...list, data],
+        });
+        localStorage.setItem("todobyhook", JSON.stringify([...list, data]));
+      }
+    }
   };
+
   return (
     <div>
       <Card
@@ -98,17 +105,15 @@ function Todoform(props) {
       >
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasictitle">
-            {/* operator chaining => name && name.title? name.title: "" */}
             <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
               name="title"
-              value={name?.title}
+              value={form?.title}
               onChange={handleChange}
             />
-            {console.log('------name.title', name.title)}
-            {name.err.title && (
-              <Form.Text style={{ color: "red" }}>{name.err.title}</Form.Text>
+            {form.err.title && (
+              <Form.Text style={{ color: "red" }}>{form.err.title}</Form.Text>
             )}
           </Form.Group>
 
@@ -117,11 +122,11 @@ function Todoform(props) {
             <Form.Control
               type="textarea"
               name="desc"
-              value={name?.desc}
+              value={form?.desc}
               onChange={handleChange}
             />
-            {name.err.desc && (
-              <Form.Text style={{ color: "red" }}>{name.err.desc}</Form.Text>
+            {form.err.desc && (
+              <Form.Text style={{ color: "red" }}>{form.err.desc}</Form.Text>
             )}
           </Form.Group>
 
@@ -130,7 +135,7 @@ function Todoform(props) {
           </Button>
         </Form>
       </Card>
-      {name.isRedirect && navigate("/show")}
+      {form.isRedirect && navigate("/show")}
     </div>
   );
 }

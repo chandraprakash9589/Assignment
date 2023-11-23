@@ -1,19 +1,17 @@
-import './App.css';
-import Todoform from './components/Todoform';
-import { Navbar,Nav,Container } from 'react-bootstrap';
-import { Routes,Route } from 'react-router-dom';
-import Todolist from './components/Todolist';
-import { useState } from 'react';
+import "./App.css";
+import Todoform from "./components/Todoform";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import { Routes, Route } from "react-router-dom";
+import Todolist from "./components/Todolist";
+import { useState } from "react";
 function App() {
-  const [Index,editIndex] = useState(null)
-  const [title,setTitle] = useState("")
-  const handleUpdate = (index)=>{
-  editIndex(index)
-  
-  }
+  const [Index, editIndex] = useState(null);
+  const handleUpdate = (index) => {
+    editIndex(index);
+  };
   return (
     <>
-     <Navbar bg="primary" data-bs-theme="dark">
+      <Navbar bg="primary" data-bs-theme="dark">
         <Container>
           <Navbar.Brand href="#home">Todo</Navbar.Brand>
           <Nav className="me-auto">
@@ -26,12 +24,17 @@ function App() {
       {/* Routing */}
 
       <Routes>
-        <Route path='/' element={<Todoform handleUpdate={handleUpdate} index={Index} />}/>
-        <Route path='/show' element={<Todolist handleUpdate={handleUpdate}/>}/>
+        <Route
+          path="/"
+          element={<Todoform handleUpdate={handleUpdate} index={Index} />}
+        />
+        <Route
+          path="/show"
+          element={<Todolist handleUpdate={handleUpdate} />}
+        />
       </Routes>
-   
     </>
-  )
+  );
 }
 
 export default App;
