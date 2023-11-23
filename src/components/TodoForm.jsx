@@ -73,6 +73,13 @@ const TodoForm = (props) => {
       descriptionError: "",
     });
   }, [form]);
+
+  useEffect(()=>{
+    if(form.isRedirect === true){
+      navigate("/showtasks")
+    }
+  })
+
   return (
     <>
       <Row
@@ -140,7 +147,6 @@ const TodoForm = (props) => {
             {isEditMode ? "Close" : "View Todos"}
           </Button>
         </Link>
-        {form.isRedirect && navigate("/showtasks")}
       </Form>
     </>
   );

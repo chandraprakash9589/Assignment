@@ -1,0 +1,10 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.App{
+  background-color: rgb(158, 160, 182);
+  height: 630px;
+  overflow: hidden;
+}
