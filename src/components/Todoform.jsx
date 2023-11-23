@@ -16,9 +16,9 @@ function Todoform(props) {
   });
 
   const handleChange = (e) => {
-    const names = e.target.name;
+    const id = e.target.id;
     const value = e.target.value;
-    setForm((prevState) => ({ ...prevState, [names]: value }));
+    setForm((prevState) => ({ ...prevState, [id]: value }));
   };
 
   const handleUpdate = (index) => {
@@ -26,8 +26,8 @@ function Todoform(props) {
     const editData = list[index];
     setForm({
       ...form,
-      title: editData.title,
-      desc: editData.desc,
+      title: editData?.title,
+      desc: editData?.desc,
       editMode: true,
       editIndex: index,
     });
@@ -40,31 +40,10 @@ function Todoform(props) {
     }
   }, []);
 
-  const handleValid = () => {
-    const { err } = form;
-
-    if (form.title === "") {
-      err.title = "Required";
-    } else {
-      err.title = "";
-    }
-    if (form.desc === "") {
-      err.desc = "Required";
-    } else {
-      err.desc = "";
-    }
-    let valid = true;
-    
-    Object.values(err).forEach((v) => {
-      v.length > 0 && (valid = false);
-    });
-    return valid;
-  };
-  handleValid();
   const handleSubmit = (e) => {
     e.preventDefault();
     const { title, list, editMode, editIndex } = form;
-    if (handleValid()) {
+  
       const data = {
         title: title,
         desc: form.desc,
@@ -91,7 +70,7 @@ function Todoform(props) {
         });
         localStorage.setItem("todobyhook", JSON.stringify([...list, data]));
       }
-    }
+    
   };
   useEffect(()=>{
     if(form.isRedirect === true){
@@ -110,30 +89,26 @@ function Todoform(props) {
         }}
       >
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasictitle">
+          <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
-              name="title"
+              id = "title"
               value={form?.title}
               onChange={handleChange}
             />
-            {form.err.title && (
-              <Form.Text style={{ color: "red" }}>{form.err.title}</Form.Text>
-            )}
+            
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicDesc">
+          <Form.Group className="mb-3">
             <Form.Label>Desc</Form.Label>
             <Form.Control
               type="textarea"
-              name="desc"
+              id = "desc"
               value={form?.desc}
               onChange={handleChange}
             />
-            {form.err.desc && (
-              <Form.Text style={{ color: "red" }}>{form.err.desc}</Form.Text>
-            )}
+           
           </Form.Group>
 
           <Button variant="primary" type="submit">

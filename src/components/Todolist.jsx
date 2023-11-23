@@ -33,7 +33,7 @@ function Todolist(props) {
                 return (
                   <tr key={index}>
                     <td>{v?.title}</td>
-                    <td>{v.desc}</td>
+                    <td>{v?.desc}</td>
                     <td>
                       <Button
                         variant="danger"
