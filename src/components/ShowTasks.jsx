@@ -30,10 +30,10 @@ const ShowTasks = () => {
     });
   };
 
-  const handleEditInputChange = (key, value) => {
+  const handleEditInputChange = (id, value) => {
     setManagetodo({
       ...managetodo,
-      [key]: value,
+      [id]: value,
     });
   };
 
@@ -87,10 +87,10 @@ const ShowTasks = () => {
             </tr>
           </thead>
           <tbody>
-            {todos.map((item, index) => (
+            {todos?.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.title}</td>
-                  <td>{item.description}</td>
+                  <td>{item?.title}</td>
+                  <td>{item?.description}</td>
                   <td>
                     <Button
                       onClick={() => handleDeleteTodo(index)}
@@ -113,22 +113,22 @@ const ShowTasks = () => {
                         backgroundColor: item.isRead && "green",
                       }}
                     >
-                      {item.isRead ? "Completed" : "Mark as Read"}
+                      {item?.isRead ? "Completed" : "Mark as Read"}
                     </Button>
                   </td>
                 </tr>
               ))}
           </tbody>
         </Table>
-        <Modal show={managetodo.showEditModal} onHide={handleCloseEditModal}>
+        <Modal show={managetodo?.showEditModal} onHide={handleCloseEditModal}>
           <Modal.Header closeButton>
             <Modal.Title>Edit Task</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <TodoForm
-              isEditMode={managetodo.showEditModal}
-              editedTitle={managetodo.editedTitle}
-              editedDescription={managetodo.editedDescription}
+              isEditMode={managetodo?.showEditModal}
+              editedTitle={managetodo?.editedTitle}
+              editedDescription={managetodo?.editedDescription}
               handleEditSubmit={handleEditSubmit}
               handleCloseEditModal={handleCloseEditModal}
               handleEditInputChange={handleEditInputChange}

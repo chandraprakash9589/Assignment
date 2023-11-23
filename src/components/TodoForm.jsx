@@ -28,8 +28,8 @@ const TodoForm = (props) => {
     titleRef.current.focus();
   }, []);
 
-  const updateInput = useCallback((key, value) => {
-    setForm((prevForm) => ({ ...prevForm, [key]: value, [`${key}Error`]: "" }));
+  const updateInput = useCallback((id, value) => {
+    setForm((prevForm) => ({ ...prevForm, [id]: value, [`${id}Error`]: "" }));
   }, []);
 
   const addToDo = useCallback(() => {
@@ -74,11 +74,11 @@ const TodoForm = (props) => {
     });
   }, [form]);
 
-  useEffect(()=>{
-    if(form.isRedirect === true){
-      navigate("/showtasks")
+  useEffect(() => {
+    if (form.isRedirect === true) {
+      navigate("/showtasks");
     }
-  })
+  });
 
   return (
     <>
@@ -94,17 +94,17 @@ const TodoForm = (props) => {
         {isEditMode || "ToDo List"}
       </Row>
       <Form className="container" style={{ maxWidth: "480px" }}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Group className="mb-3">
           <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
-            name="title"
+            id='title'
             placeholder="Enter the title"
-            value={isEditMode ? editedTitle : form.title}
+            value={isEditMode ? editedTitle : form?.title}
             onChange={(e) =>
               isEditMode
                 ? handleEditInputChange("editedTitle", e.target.value)
-                : updateInput("title", e.target.value)
+                : updateInput(e.target.id, e.target.value)
             }
             ref={titleRef}
           />
@@ -112,18 +112,18 @@ const TodoForm = (props) => {
             {form.titleError}
           </div>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Group className="mb-3">
           <Form.Label>Description</Form.Label>
           <Form.Control
             as="textarea"
-            name="description"
+            id="description"
             placeholder="Enter description"
             rows={3}
-            value={isEditMode ? editedDescription : form.description}
+            value={isEditMode ? editedDescription : form?.description}
             onChange={(e) =>
               isEditMode
                 ? handleEditInputChange("editedDescription", e.target.value)
-                : updateInput("description", e.target.value)
+                : updateInput(e.target.id, e.target.value)
             }
           />
           <div style={{ color: "red", marginBottom: "10px" }}>
