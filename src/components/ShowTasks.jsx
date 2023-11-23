@@ -87,8 +87,7 @@ const ShowTasks = () => {
             </tr>
           </thead>
           <tbody>
-            {todos &&
-              todos.map((item, index) => (
+            {todos.map((item, index) => (
                 <tr key={index}>
                   <td>{item.title}</td>
                   <td>{item.description}</td>

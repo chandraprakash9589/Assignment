@@ -18,7 +18,7 @@ const TodoForm = (props) => {
     description: "",
     titleError: "",
     descriptionError: "",
-    isRedirect:false
+    isRedirect: false,
   });
 
   const titleRef = useRef(null);
@@ -32,7 +32,6 @@ const TodoForm = (props) => {
     setForm((prevForm) => ({ ...prevForm, [key]: value, [`${key}Error`]: "" }));
   }, []);
 
-  
   const addToDo = useCallback(() => {
     const { title, description } = form;
 
@@ -125,17 +124,8 @@ const TodoForm = (props) => {
           </div>
         </Form.Group>
         <Button
-          // disabled={isEditMode? null :state.title === "" || state.description === ""}
           variant="primary"
-          onClick={() =>
-            isEditMode
-              ? handleEditSubmit(
-                  "editedTitle",
-                  "editedDescription",
-                  "editedIndex"
-                )
-              : addToDo()
-          }
+          onClick={() => (isEditMode ? handleEditSubmit() : addToDo())}
           style={{ padding: "6px 25px" }}
         >
           {isEditMode ? "Save Changes" : "Add"}
