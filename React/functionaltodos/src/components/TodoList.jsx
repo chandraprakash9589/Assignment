@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import { Button } from "react-bootstrap";
@@ -37,12 +37,12 @@ const Todos = ({
     return isValid;
   };
 
-  const handleChange = (name, value) => {
+  const handleChange = (id, value) => {
     setState((prevState) => ({
       ...prevState,
       error: false,
-      [name]: value,
-      [`${name}Error`]: "",
+      [id]: value,
+      [`${id}Error`]: null,
     }));
     setInput(true);
   };
@@ -71,7 +71,7 @@ const Todos = ({
   return (
     <>
       <div className="container">
-        {isEdit ? "" : <h1 className="mt-5 ">To-do Form</h1>}
+        {isEdit ? null : <h1 className="mt-5 ">To-do Form</h1>}
         <Form
           onSubmit={(e) => {
             isEdit ? onUpdate(e) : handleSubmit(e);
@@ -80,17 +80,17 @@ const Todos = ({
           <Form.Group>
             <Form.Label className="mt-5">Title</Form.Label>
             <span>
-              <InputGroup hasValidation>
+              <InputGroup >
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 <Form.Control
                   type="text"
                   placeholder="title"
-                  name="title"
+                  id="title"
                   value={isEdit ? updatedTitle : title}
                   onChange={(e) =>
                     isEdit
                       ? handleInputChange("updatedTitle", e.target.value)
-                      : handleChange("title", e.target.value)
+                      : handleChange(e.target.id, e.target.value)
                   }
                 />
                 <div style={{ color: "red", paddingRight: "100px" }}>
@@ -102,18 +102,18 @@ const Todos = ({
           <br />
           <Form.Group>
             <Form.Label>Description</Form.Label>
-            <InputGroup hasValidation>
+            <InputGroup>
               <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
               <Form.Control
                 type="text"
                 placeholder="description"
                 aria-describedby="inputGroupPrepend"
-                name="description"
+                id="description"
                 value={isEdit ? updatedDescription : description}
                 onChange={(e) =>
                   isEdit
                     ? handleInputChange("updatedDescription", e.target.value)
-                    : handleChange("description", e.target.value)
+                    : handleChange(e.target.id, e.target.value)
                 }
               />
               <div style={{ color: "red", paddingRight: "100px" }}>
@@ -126,13 +126,13 @@ const Todos = ({
           <Button variant="primary" type="submit">
             {isEdit ? "Update" : "Add To-Do"}
           </Button>
-          {"  "}
-          {isUpdated ? <span className="text-danger">Updated...</span> : ""}
-          {input ? "" : <span className="text-danger">To-do Added...</span>}
+          {" "}
+          {isUpdated ? <span className="text-danger">Updated...</span> : null}
+          {input ? null : <span className="text-danger">To-do Added...</span>}
           <br />
           <br />
           {isEdit ? (
-            ""
+            null
           ) : (
             <Link to={"/"}>
               <Button variant="primary">Show To-Do</Button>

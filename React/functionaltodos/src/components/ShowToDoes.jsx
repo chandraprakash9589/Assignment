@@ -5,64 +5,74 @@ import Todos from "./TodoList";
 import "./component.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
- 
+
 const ShowToDoes = () => {
+  const [isRead,setIsread] =  useState(false) 
+  const [isOpen,setIsopen] =  useState(false) 
+  const [isUpdated,setIsupdated] =  useState(false) 
   const [state, setState] = useState({
-    data: (localStorage.getItem("data")) ? JSON.parse(localStorage.getItem("data")) : [],
+    data: localStorage.getItem("data")
+      ? JSON.parse(localStorage.getItem("data"))
+      : [],
     editingIndex: -1,
     updatedTitle: "",
     updatedDescription: "",
-    isOpen: false,
-    isRead: false,
-    isUpdated: false,
   });
 
-  useEffect(()=>{
-    localStorage.setItem('data',JSON.stringify(state.data))
-  },[state.data])
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(state.data));
+  }, [state.data]);
 
   const openModal = (index) => {
-    setState({ 
+    setState({
       ...state,
-      isOpen: true,
-      updatedTitle: state.data[index].title,
-      updatedDescription: state.data[index].description,
+      updatedTitle: state.data[index]?.title,
+      updatedDescription: state.data[index]?.description,
       editingIndex: index,
     });
+    setIsopen(true);
   };
 
   const closeModal = () => {
     setState({
       ...state,
-      isOpen: false,
       updatedTitle: "",
       updatedDescription: "",
       editingIndex: null,
-      isUpdated: false,
     });
+    setIsopen(false);
+    setIsupdated(false)
   };
 
-  const handleRemoveClick = useCallback((index) => {
-    if (window.confirm("Are you sure you want to remove this todo?")) {
+  const handleRemoveClick = useCallback(
+    (index) => {
+      if (window.confirm("Are you sure you want to remove this todo?")) {
+        const updatedData = [...state.data];
+        updatedData?.splice(index, 1);
+        setState({ ...state, data: updatedData });
+      }
+    },
+    [state.data]
+  );
+
+  const handleMarkAsReadClick = useCallback(
+    (index) => {
+      
       const updatedData = [...state.data];
-      updatedData.splice(index, 1);
+      updatedData[index].isRead= true;
       setState({ ...state, data: updatedData });
-    }},[state.data])
+    },
+    [state.data]
+  );
 
-  const handleMarkAsReadClick = useCallback((index) => {
-    const updatedData = [...state.data];
-    updatedData[index].isRead = true;
-    setState({ ...state, data: updatedData });
-  },[state.data]);
-
-  const handleInputChange = (name, value) => {
+  const handleInputChange = (id, value) => {
     setState({
       ...state,
-      [name]: value,
-      isUpdated: false,
+      [id]: value,
     });
+    setIsupdated(false);
   };
-  console.log("show todo component called.....")
+
   const handleUpdate = (event) => {
     event.preventDefault();
     const { editingIndex, updatedTitle, updatedDescription } = state;
@@ -76,7 +86,9 @@ const ShowToDoes = () => {
       title: updatedTitle,
       description: updatedDescription,
     };
-    setState({ ...state, isUpdated: true, data: updatedData });
+
+    setState({ ...state, data: updatedData });
+    setIsupdated(true);
   };
 
   const { data } = state;
@@ -138,14 +150,14 @@ const ShowToDoes = () => {
             ))}
         </tbody>
       </Table>
-      <Modal show={state.isOpen} onHide={closeModal}>
+      <Modal show={isOpen} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>Edit To-Do</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Todos
-            isUpdated={state.isUpdated}
-            isEdit={state.isOpen}
+            isUpdated={isUpdated}
+            isEdit={isOpen}
             updatedTitle={state.updatedTitle}
             updatedDescription={state.updatedDescription}
             editingIndex={state.editingIndex}
@@ -164,4 +176,3 @@ const ShowToDoes = () => {
 };
 
 export default ShowToDoes;
-

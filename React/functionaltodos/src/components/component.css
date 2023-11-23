@@ -1,5 +1,371 @@
-
 .read{
   color: gray;
   font-style: italic;
 }
+/* 
+import React, {lazy, Suspense} from "react";
+import LoadingScreen from "./components/LoadingScreen.jsx";
+import { Route, Routes } from "react-router-dom";
+const Todos = lazy(()=> {
+  return new Promise(resolve =>{
+    setTimeout(()=>resolve(import("./components/TodoList.jsx")),2000);
+  });
+});
+const ShowToDoes = lazy(()=> {
+  return new Promise(resolve =>{
+    setTimeout(()=>resolve(import("./components/ShowToDoes.jsx")),2000);
+  });
+});
+
+const App = () => {
+  return (
+    <div>
+      <Routes>
+        <Route exact path="/Add-todo" element={
+          <Suspense fallback={<LoadingScreen/>}>
+            <Todos />
+          </Suspense>
+        } />
+        <Route path="/" element={
+          <Suspense fallback={<LoadingScreen/>}>
+            <ShowToDoes />
+          </Suspense>
+        } />
+      </Routes>
+    </div>
+  );
+};
+
+export default App; */
+
+/*
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../App.css";
+import { Button } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
+import InputGroup from "react-bootstrap/InputGroup";
+
+const Todos = ({
+  isUpdated,
+  isEdit,
+  updatedTitle,
+  updatedDescription,
+  onUpdate,
+  handleInputChange,
+}) => {
+  const [state, setState] = useState({
+    title: "learn redux",
+    description: "learn redux from chai aur code",
+    error: {},
+  });
+  const [input, setInput] = useState(true);
+
+  const validateCheck = () => {
+    const newError = {};
+    let isValid = true;
+    const { title, description } = state;
+    if (!title.trim()) {
+      newError.title = "-Title Error";
+      isValid = false;
+    }
+    if (!description.trim()) {
+      newError.description = "-Description Error";
+      isValid = false;
+    }
+    setState((prevState) => ({ ...prevState, error: newError }));
+    return isValid;
+  };
+
+  const handleChange = (name, value) => {
+    setState((prevState) => ({
+      ...prevState,
+      error: false,
+      [name]: value,
+      [`${name}Error`]: null,
+    }));
+    setInput(true);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateCheck()) {
+      const userData = {
+        title: state.title,
+        description: state.description,
+      };
+      setInput(false);
+      console.log("userdata:", userData);
+      const existingData = JSON.parse(localStorage.getItem("data")) || [];
+      const updatedData = [...existingData, userData];
+      localStorage.setItem("data", JSON.stringify(updatedData));
+      setState((prevState) => ({
+        ...prevState,
+        title: "learn React",
+        description: "From youtube..",
+      }));
+    }
+  };
+
+  const { title, description, error } = state;
+  return (
+    <>
+      <div className="container">
+        {isEdit ? null : <h1 className="mt-5 ">To-do Form</h1>}
+        <Form
+          onSubmit={(e) => {
+            isEdit ? onUpdate(e) : handleSubmit(e);
+          }}
+        >
+          <Form.Group>
+            <Form.Label className="mt-5">Title</Form.Label>
+            <span>
+              <InputGroup >
+                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="title"
+                  name="title"
+                  value={isEdit ? updatedTitle : title}
+                  onChange={(e) =>
+                    isEdit
+                      ? handleInputChange("updatedTitle", e.target.value)
+                      : handleChange("title", e.target.value)
+                  }
+                />
+                <div style={{ color: "red", paddingRight: "100px" }}>
+                  {error.title}
+                </div>
+              </InputGroup>
+            </span>
+          </Form.Group>
+          <br />
+          <Form.Group>
+            <Form.Label>Description</Form.Label>
+            <InputGroup>
+              <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+              <Form.Control
+                type="text"
+                placeholder="description"
+                aria-describedby="inputGroupPrepend"
+                name="description"
+                value={isEdit ? updatedDescription : description}
+                onChange={(e) =>
+                  isEdit
+                    ? handleInputChange("updatedDescription", e.target.value)
+                    : handleChange("description", e.target.value)
+                }
+              />
+              <div style={{ color: "red", paddingRight: "100px" }}>
+                {error.description}
+              </div>
+            </InputGroup>
+          </Form.Group>
+          <br />
+          <br />
+          <Button variant="primary" type="submit">
+            {isEdit ? "Update" : "Add To-Do"}
+          </Button>
+          {" "}
+          {isUpdated ? <span className="text-danger">Updated...</span> : null}
+          {input ? null : <span className="text-danger">To-do Added...</span>}
+          <br />
+          <br />
+          {isEdit ? (
+            null
+          ) : (
+            <Link to={"/"}>
+              <Button variant="primary">Show To-Do</Button>
+            </Link>
+          )}
+        </Form>
+      </div>
+    </>
+  );
+};
+
+export default Todos;
+
+*/
+
+
+
+
+/*
+import React, { useState, useEffect, useCallback } from "react";
+import Table from "react-bootstrap/Table";
+import Modal from "react-bootstrap/Modal";
+import Todos from "./TodoList";
+import "./component.css";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+
+const ShowToDoes = () => {
+  const [state, setState] = useState({
+    data: localStorage.getItem("data")
+      ? JSON.parse(localStorage.getItem("data"))
+      : [],
+    editingIndex: -1,
+    updatedTitle: "",
+    updatedDescription: "",
+    isOpen: false,
+    isRead: false,
+    isUpdated: false,
+  });
+
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(state.data));
+  }, [state.data]);
+
+  const openModal = (index) => {
+    setState({
+      ...state,
+      isOpen: true,
+      updatedTitle: state.data[index].title,
+      updatedDescription: state.data[index].description,
+      editingIndex: index,
+    });
+  };
+
+  const closeModal = () => {
+    setState({
+      ...state,
+      isOpen: false,
+      updatedTitle: "",
+      updatedDescription: "",
+      editingIndex: null,
+      isUpdated: false,
+    });
+  };
+
+  const handleRemoveClick = useCallback(
+    (index) => {
+      if (window.confirm("Are you sure you want to remove this todo?")) {
+        const updatedData = [...state.data];
+        updatedData.splice(index, 1);
+        setState({ ...state, data: updatedData });
+      }
+    },  [state.data]
+  );
+
+  const handleMarkAsReadClick = useCallback(
+    (index) => {
+      const updatedData = [...state.data];
+      updatedData[index].isRead = true;
+      setState({ ...state, data: updatedData });
+    },
+    [state.data]
+  );
+
+  const handleInputChange = (name, value) => {
+    setState({
+      ...state,
+      [name]: value,
+      isUpdated: false,
+    });
+  };
+
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    const { editingIndex, updatedTitle, updatedDescription } = state;
+    if (!(updatedTitle && updatedDescription).trim()) {
+      alert("Title and description cannot be empty");
+      return;
+    }
+    const updatedData = [...state.data];
+    updatedData[editingIndex] = {
+      ...updatedData[editingIndex],
+      title: updatedTitle,
+      description: updatedDescription,
+    };
+    setState({ ...state, isUpdated: true, data: updatedData });
+  };
+
+  const { data } = state;
+  return (
+    <div>
+      <Link to={"/Add-todo"}>
+        <Button type="button" className="btn btn-primary mt-2 m-2">
+          &#8592; Add new-todo
+        </Button>
+      </Link>
+      <h1 className="text-center mt-5">To-Do List</h1>
+      <Table className="text-center mt-4" striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data &&
+            data.map((item, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>
+                  <span className={item.isRead ? "read" : null}>
+                    {item.title}
+                  </span>
+                </td>
+                <td>
+                  <span className={item.isRead ? "read" : null}>
+                    {item.description}
+                  </span>
+                </td>
+                <td className="text-center">
+                  <>
+                    <Button
+                      variant="secondary"
+                      onClick={() => openModal(index)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleRemoveClick(index)}
+                    >
+                      Remove
+                    </Button>
+                    <Button
+                      variant="success"
+                      onClick={() => handleMarkAsReadClick(index)}
+                    >
+                      Done
+                    </Button>
+                  </>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
+      <Modal show={state.isOpen} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit To-Do</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Todos
+            isUpdated={state.isUpdated}
+            isEdit={state.isOpen}
+            updatedTitle={state.updatedTitle}
+            updatedDescription={state.updatedDescription}
+            editingIndex={state.editingIndex}
+            handleInputChange={handleInputChange}
+            onUpdate={handleUpdate}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
+
+export default ShowToDoes;
+
+*/
