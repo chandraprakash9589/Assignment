@@ -21,7 +21,7 @@ function Todoform(props) {
     setForm((prevState) => ({ ...prevState, [names]: value }));
   };
 
-  const handleUpdate = useCallback((index) => {
+  const handleUpdate = (index) => {
     const { list } = form;
     const editData = list[index];
     setForm({
@@ -31,7 +31,7 @@ function Todoform(props) {
       editMode: true,
       editIndex: index,
     });
-  }, []);
+  }
 
   useEffect(() => {
     const { index } = props;
@@ -54,6 +54,7 @@ function Todoform(props) {
       err.desc = "";
     }
     let valid = true;
+    
     Object.values(err).forEach((v) => {
       v.length > 0 && (valid = false);
     });
@@ -92,6 +93,11 @@ function Todoform(props) {
       }
     }
   };
+  useEffect(()=>{
+    if(form.isRedirect === true){
+      navigate("/show")
+    }
+  })
 
   return (
     <div>
@@ -135,7 +141,6 @@ function Todoform(props) {
           </Button>
         </Form>
       </Card>
-      {form.isRedirect && navigate("/show")}
     </div>
   );
 }

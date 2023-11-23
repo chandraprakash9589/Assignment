@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button,Image } from "react-bootstrap";
+import nodata from "../nodata.png";
+
 function Todolist(props) {
   const [data, setData] = useState(
     JSON.parse(localStorage.getItem("todobyhook")) || []
@@ -63,7 +65,13 @@ function Todolist(props) {
     );
   } else {
     return (
-      <h1 style={{ textAlign: "center", marginTop: "50px" }}>Empty list</h1>
+      <div>
+      <Image
+        src={nodata}
+        rounded
+        style={{ height: "400px", marginLeft: "400px" }}
+      />
+    </div>
     );
   }
 }
