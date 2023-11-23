@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
 import Todos from "./TodoList";
@@ -42,21 +42,18 @@ const ShowToDoes = () => {
     });
   };
 
-  const handleRemoveClick = (index) => {
+  const handleRemoveClick = useCallback((index) => {
     if (window.confirm("Are you sure you want to remove this todo?")) {
       const updatedData = [...state.data];
       updatedData.splice(index, 1);
       setState({ ...state, data: updatedData });
-      // localStorage.setItem("data", JSON.stringify(updatedData));
-    }
-  };
+    }},[state.data])
 
-  const handleMarkAsReadClick = (index) => {
+  const handleMarkAsReadClick = useCallback((index) => {
     const updatedData = [...state.data];
     updatedData[index].isRead = true;
     setState({ ...state, data: updatedData });
-    // localStorage.setItem("data", JSON.stringify(updatedData));
-  };
+  },[state.data]);
 
   const handleInputChange = (name, value) => {
     setState({
