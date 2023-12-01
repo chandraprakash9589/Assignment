@@ -25,6 +25,7 @@ export default function TodoList(props) {
                 placeholder="Title"
                 type="text"
                 name="title"
+                required
                 value={title}
                 onChange={(event) => {
                   setTitle(event.target.value);
@@ -39,6 +40,7 @@ export default function TodoList(props) {
               <Form.Control
                 placeholder="Description"
                 type="text"
+                required
                 name="description"
                 value={description}
                 onChange={(event) => {
@@ -52,8 +54,8 @@ export default function TodoList(props) {
               onClick={() =>
                 props.addTodoHandler(
                   { title: title, description: description },
-                  setTitle(""),
-                  setDescription("")
+                  // setTitle(""),
+                  // setDescription("")
                 )
               }
             >
@@ -61,7 +63,7 @@ export default function TodoList(props) {
             </Button>
           </Form.Group>
           <Form.Group>
-            <Link to={"/Show Todo"}>
+            <Link to={"/Show-Todo"}>
               <Button>Show To-do </Button>
             </Link>
           </Form.Group>
