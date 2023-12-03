@@ -18,21 +18,36 @@ const todoReducer = (state = initialData, action) => {
       };
 
     case "DELETE_TODO":
-      const newList = state.list.filter((item)=> item.id !== action.id)
+      const newList = state.list.filter((item) => item.id !== action.id);
       return {
         ...state,
-        list: newList
+        list: newList,
+      };
+
+    case "MARK_AS_READ":
+      const markedList = state.list.map((item) => {
+      if (item.id === action.id) {
+        return {
+          ...item,
+          isRead: !item.isRead,
+        };
       }
-    
+      return item;
+    });
+      return {
+        ...state,
+        list: markedList
+      };
+
     case "EDIT_TODO":
-      const { index, editedTitle, editedDescription } = action.payload;
-      const updatedList = state.list.map((item, i) => {
-        if (i === index) {
+      const { title, description, index } = action.payload;
+      const updatedList = state.list.map((item) => {
+        if (item.id === index) {
           return {
-            id: item.id,
+            ...item,
             data: {
-              title: editedTitle,
-              description: editedDescription,
+              title: title,
+              description: description,
             },
           };
         }
@@ -44,7 +59,6 @@ const todoReducer = (state = initialData, action) => {
       };
     default:
       return state;
-
   }
 };
 

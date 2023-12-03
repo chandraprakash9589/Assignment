@@ -1,47 +1,57 @@
 import React from "react";
 import { useState } from "react";
-import { Table, Row, Col, Button, Modal } from "react-bootstrap";
+import { Table, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTodo } from "../actions";
-import TodoForm from "./TodoForm";
+import { deleteTodo, editTodo, readTodo } from "../actions";
 
 const ShowTodos = () => {
   const list = useSelector((state) => state.todoReducer.list);
   const dispatch = useDispatch();
 
-  const [managetodo, setManagetodo] = useState({
-    todos: list?.map((item)=>item.data),
-    showEditModal: false,
+  const [editForm, setEditForm] = useState({
+    title: "",
+    description: "",
     editedIndex: null,
+    showEditModal: false,
   });
-  
+
   const handleEditTodo = (index) => {
     const { title, description } = list[index].data;
-    setManagetodo({
-      ...managetodo,
+    setEditForm({
+      ...editForm,
       showEditModal: true,
-      editedTitle: title,
-      editedDescription: description,
+      title: title,
+      description: description,
       editedIndex: index,
     });
   };
-  console.log(managetodo,"this is manage");
+
   const handleCloseEditModal = () => {
-    setManagetodo({
-      ...managetodo,
+    setEditForm({
+      ...editForm,
       showEditModal: false,
-      editedTitle: "",
-      editedDescription: "",
-      editedIndex: null,
     });
   };
 
   const handleEditInputChange = (id, value) => {
-    setManagetodo({
-      ...managetodo,
+    setEditForm({
+      ...editForm,
       [id]: value,
     });
+  };
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    const { title, description, editedIndex } = editForm;
+    const newData = {
+      title: title,
+      description: description,
+      id: list[editedIndex].id,
+    };
+
+    dispatch(editTodo(newData));
+    handleCloseEditModal();
   };
 
   return (
@@ -82,24 +92,60 @@ const ShowTodos = () => {
                     >
                       Edit
                     </Button>
+                    <Button
+                      variant="info"
+                      style={{
+                        backgroundColor: item.isRead && "green",
+                      }}
+                      onClick={() => dispatch(readTodo(item.id))}
+                    >
+                      {item?.isRead ? "Completed" : "Mark as Read"}
+                    </Button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </Table>
-          <Modal show={managetodo.showEditModal} onHide={handleCloseEditModal}>
+          <Modal show={editForm.showEditModal} onHide={handleCloseEditModal}>
             <Modal.Header closeButton>
               <Modal.Title>Edit Task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <TodoForm
-              isEditMode={managetodo?.showEditModal}
-              editedTitle={managetodo?.editedTitle}
-              editedDescription={managetodo?.editedDescription}
-              editedIndex={managetodo?.editedIndex}
-              handleCloseEditModal={handleCloseEditModal}
-              handleEditInputChange={handleEditInputChange}
-              />
+              <Form onSubmit={handleEditSubmit}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={editForm.title || ""}
+                    onChange={(e) => {
+                      handleEditInputChange(e.target.name, e.target.value);
+                    }}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    type="textarea"
+                    name="description"
+                    value={editForm.description || ""}
+                    onChange={(e) =>
+                      handleEditInputChange(e.target.name, e.target.value)
+                    }
+                  />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+                <br />
+                <Button
+                  variant="danger"
+                  onClick={() => handleCloseEditModal()}
+                  style={{ marginTop: "10px" }}
+                >
+                  Close
+                </Button>
+              </Form>
             </Modal.Body>
           </Modal>
         </Col>

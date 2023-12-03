@@ -1,32 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Form, Button, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import { addToDo, editTodo } from "../actions";
+import { addToDo } from "../actions";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const TodoForm = (props) => {
+const TodoForm = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const titleRef = useRef(null);
 
-  const {
-    isEditMode,
-    editedTitle,
-    editedDescription,
-    editedIndex,
-    handleCloseEditModal,
-    handleEditInputChange,
-  } = props;
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
 
   const [form, setForm] = useState({
     title: "",
     description: "",
     titleError: "",
     descriptionError: "",
+    isRedirect: false
   });
 
-  const dispatch = useDispatch()
   const updateInput = (id, value) => {
     setForm((prevForm) => ({ ...prevForm, [id]: value, [`${id}Error`]: "" }));
   };
+
+  const validation = () => {
+    const { title, description } = form;
+    let hasError = false;
+  
+    if (title.trim().length === 0) {
+      setForm((prevState) => ({
+        ...prevState,
+        titleError: "Please enter a title.",
+      }));
+      hasError = true
+    }
+  
+    if (description.trim().length === 0) {
+      setForm((prevState) => ({
+        ...prevState,
+        descriptionError: "Please enter a description.",
+      }));
+      hasError = true
+    }
+    return !hasError;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const isValid = validation();
+
+    if (isValid) {
+      (dispatch(addToDo(form)) && setForm({
+        title: "",
+        description: "",
+        titleError: "",
+        descriptionError: "",
+        isRedirect:true
+      }))
+    }
+  }
+
+  useEffect(() => {
+    if (form.isRedirect === true) {
+      navigate("/showtodos");
+    }
+  });
+    
   return (
     <div>
       <>
@@ -39,19 +81,18 @@ const TodoForm = (props) => {
           fontWeight: "bolder",
         }}
       >
-        {isEditMode || "ToDo List"}
+        ToDo List
       </Row>
-      <Form className="container" style={{ maxWidth: "480px" }}>
+      <Form className="container" style={{ maxWidth: "480px" }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
             id='title'
             placeholder="Enter the title"
-            value={isEditMode ? editedTitle : form?.title}
-            onChange={(e) =>isEditMode
-              ? handleEditInputChange("editedTitle", e.target.value)
-              : updateInput(e.target.id, e.target.value)}
+            value={form?.title}
+            onChange={(e) => updateInput(e.target.id, e.target.value)}
+            ref={titleRef}
           />
           <div style={{ color: "red", marginBottom: "10px" }}>
             {form.titleError}
@@ -64,10 +105,8 @@ const TodoForm = (props) => {
             id="description"
             placeholder="Enter description"
             rows={3}
-            value={isEditMode ? editedDescription : form?.description}
-            onChange={(e) => isEditMode
-              ? handleEditInputChange("editedDescription", e.target.value)
-              : updateInput(e.target.id, e.target.value)}
+            value={form?.description}
+            onChange={(e) => updateInput(e.target.id, e.target.value)}
           />
           <div style={{ color: "red", marginBottom: "10px" }}>
             {form.descriptionError}
@@ -75,34 +114,19 @@ const TodoForm = (props) => {
         </Form.Group>
         <Button
           variant="primary"
-          onClick={()=> {if (isEditMode) {
-            dispatch(editTodo({
-              editedTitle: editedTitle,
-              editedDescription: editedDescription,
-              editedIndex: editedIndex,
-            }));
-            handleCloseEditModal();
-          } else {
-            dispatch(addToDo(form));
-            setForm({
-              title: "",
-              description: "",
-              titleError: "",
-              descriptionError: "",
-            });
-          }}}
+          onClick={()=> handleSubmit}
           style={{ padding: "6px 25px" }}
+          type="submit"
         >
-          {isEditMode ? "Save Changes" : "Add"}
+          Add
         </Button>
         <br />
         <Link to="/showtodos">
         <Button
             variant="success"
             style={{ marginTop: "10px" }}
-            onClick={() => isEditMode && handleCloseEditModal()}
           >
-            {isEditMode ? "Close" : "View Todos"}
+            Show Todos
           </Button>
         </Link>
       </Form>

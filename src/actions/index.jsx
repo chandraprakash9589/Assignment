@@ -15,13 +15,19 @@ export const deleteTodo = (id) => {
   };
 };
 
-export const editTodo = (index, editedTitle, editedDescription) => {
+export const readTodo = (id) => {
+  return {
+    type: "MARK_AS_READ",
+    id,
+  }
+}
+export const editTodo = (newData) => {
   return {
     type: "EDIT_TODO",
     payload: {
-      index,
-      editedTitle,
-      editedDescription,
+      title: newData.title,
+      description: newData.description,
+      index: newData.id,
     },
   };
 };
