@@ -1,6 +1,6 @@
 import ShowTodo from "../components/ShowTodo";
 import { connect } from "react-redux";
-import {removeTodo, doneTodo} from '../services/Actions';
+import { removeTodo, doneTodo, editTodo } from "../services/Actions";
 
 const mapStateToProps = (state) => ({
   data: state.todoReducers,
@@ -10,9 +10,7 @@ const mapDispatchToProps = (dispatch) => ({
   removeTodoHandler: (data) => dispatch(removeTodo(data)),
   doneTodoHandler: (index) => dispatch(doneTodo(index)),
   // editTodoHandler: (index) => dispatch(editTodo(index)),
-  
-  
+  editTodoHandler: (index, newData) => dispatch(editTodo(index, newData)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowTodo);

@@ -15,14 +15,13 @@ export const removeTodo = (index) => {
 export const doneTodo = (index) => {
   return {
     type: "DONE_TODO",
-    payload: index, 
+    payload: index,
   };
 };
-// export const editTodo = (index) => {
-//   return {
-//     type: "EDIT_TODO",
-//     payload: index, 
-//   };
-// };
 
-
+export const editTodo = (index, newData) => {
+  return {
+    type: "EDIT_TODO",
+    payload: { index, newData },
+  };
+};

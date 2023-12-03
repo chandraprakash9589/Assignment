@@ -6,13 +6,9 @@ const todoReducers = (state = [], action) => {
     case "ADD_TODO":
       return [...state, { list: action.data }];
 
-    // case "REMOVE_TODO":
-    //   return state.slice(0, -1);
-    // case "REMOVE_TODO":
-    //   return state.filter((item, index) => index !== state.length - 1);
-      case "REMOVE_TODO":
-        return state.filter((item, index) => index !== action.payload);
-      
+    case "REMOVE_TODO":
+      return state.filter((item, index) => index !== action.payload);
+
     case "DONE_TODO":
       return state.map((item, index) => {
         if (index === action.payload) {
@@ -20,6 +16,15 @@ const todoReducers = (state = [], action) => {
         }
         return item;
       });
+
+    case "EDIT_TODO":
+      return state.map((item, index) => {
+        if (index === action.payload.index) {
+          return { ...item, list: action.payload.newData };
+        }
+        return item;
+      });
+
     default:
       return state;
   }

@@ -4,19 +4,36 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import TodoList from "./TodoList";
+import Modal from "react-bootstrap/Modal";
 
-export default function ShowTodo(props) {
-  const { data } = props;
-  const handleDoneTodo = (index) => {
-    props.doneTodoHandler(index);
+const ShowTodo = (props) => {
+  const {
+    data,
+    addTodoHandler,
+    editTodoHandler,
+    removeTodoHandler,
+    doneTodoHandler,
+  } = props;
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingTodo, setEditingTodo] = useState(null);
+
+  const handleEditTodo = (index) => {
+    setEditingTodo({ index, data: data[index].list });
+    setShowEditModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setEditingTodo(null);
+    setShowEditModal(false);
   };
 
   return (
     <>
       <div className="container">
         <Link to={"/"}>
-          <Button className="btn btn-primary mt-3 m-2">Add new</Button>
+          <Button className="btn btn-primary mt-3">Add new</Button>
         </Link>
+        <h1 className="text-center">To-Do List</h1>
         <Table
           className="text-center mt-5"
           striped
@@ -41,20 +58,22 @@ export default function ShowTodo(props) {
                   <td>{item.list.description}</td>
                   <td className="text-center">
                     <>
-                 
-                      <Button variant="secondary"
-                      onClick={handleEditClick}
-                      >Edit</Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() => handleEditTodo(index)}
+                      >
+                        Edit
+                      </Button>
 
                       <Button
                         variant="danger"
-                        onClick={() => props.removeTodoHandler(index)}
+                        onClick={() => removeTodoHandler(index)}
                       >
                         Remove
                       </Button>
                       <Button
                         variant="success"
-                        onClick={() => handleDoneTodo(index)}
+                        onClick={() => doneTodoHandler(index)}
                       >
                         {item.read ? "Completed" : "Done"}
                       </Button>
@@ -64,7 +83,23 @@ export default function ShowTodo(props) {
               ))}
           </tbody>
         </Table>
+        <Modal show={showEditModal} onHide={handleCloseEditModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Todo</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <TodoList
+              addTodoHandler={addTodoHandler}
+              editTodoHandler={editTodoHandler}
+              editingTodo={editingTodo}
+              handleCloseEditModal={handleCloseEditModal}
+            />
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
+        </Modal>
       </div>
     </>
   );
-}
+};
+
+export default ShowTodo;
