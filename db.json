@@ -1,0 +1,26 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "email": "abc@gmail.com"
+    },
+    {
+      "email": "abc@gmail.com",
+      "password": "123",
+      "copassword": "123",
+      "id": 2
+    },
+    {
+      "email": "abc@gmail.com",
+      "password": "456",
+      "copassword": "456",
+      "id": 3
+    },
+    {
+      "email": "abc@gmail.com",
+      "password": "123456789",
+      "copassword": "123456789",
+      "id": 4
+    }
+  ]
+}

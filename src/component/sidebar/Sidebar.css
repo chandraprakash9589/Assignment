@@ -1,0 +1,12 @@
+.side-box{
+  background-color: rgb(248, 210, 248);
+  width: 200px;
+  height: 628px;
+}
+ul{
+  list-style: none;
+}
+.listItem{
+  line-height: 70px;
+}
+

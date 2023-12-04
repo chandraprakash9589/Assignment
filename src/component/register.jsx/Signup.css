@@ -1,0 +1,10 @@
+.container{
+  margin-top: 100px;
+}
+.form{
+  margin-left: 310px;
+  width: 500px;
+}
+.errForm{
+  color: red;
+}
