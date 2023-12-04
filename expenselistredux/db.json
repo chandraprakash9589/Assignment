@@ -1,0 +1,111 @@
+{
+  "expenses": [
+    {
+      "expense_type": "card",
+      "expense_amount": "4500",
+      "description": "Shoes",
+      "expense_date": "2023-10-05",
+      "id": 2
+    },
+    {
+      "expense_type": "cash",
+      "expense_amount": "5000",
+      "description": "Shopping",
+      "expense_date": "2023-11-06",
+      "id": 3
+    },
+    {
+      "expense_type": "cash",
+      "expense_amount": "1000",
+      "description": "Grocery",
+      "expense_date": "2023-10-18",
+      "id": 5
+    },
+    {
+      "expense_type": "cash",
+      "expense_amount": "300",
+      "description": "Flight Travel",
+      "expense_date": "2023-06-13",
+      "id": 6
+    },
+    {
+      "expense_type": "card",
+      "expense_amount": "450",
+      "description": "Shopping",
+      "expense_date": "2023-11-07",
+      "id": 7
+    }
+  ],
+  "profile": {
+    "first_name": "Micheal",
+    "last_name": "Tyson",
+    "email": "mike@example.com"
+  },
+  "users": [
+    {
+      "email": "mike@example.com",
+      "password": "mike@123",
+      "id": 1
+    },
+    {
+      "email": "example@gmail.com",
+      "password": "123458",
+      "id": 2
+    },
+    {
+      "email": "example@gmail.com",
+      "password": "1234568",
+      "id": 3
+    },
+    {
+      "email": "yashs3393@gmail.com",
+      "password": "123123",
+      "id": 4
+    },
+    {
+      "Email": "yash@123",
+      "Password": "123",
+      "id": 5
+    },
+    {
+      "Email": "yash@123",
+      "Password": "4444",
+      "id": 6
+    },
+    {
+      "Email": "yash@123",
+      "Password": "1234",
+      "id": 7
+    },
+    {
+      "Email": "yash@123",
+      "Password": "123",
+      "id": 8
+    },
+    {
+      "Email": "yash@123",
+      "Password": "123",
+      "id": 9
+    },
+    {
+      "Email": "yash@123",
+      "Password": "333",
+      "id": 10
+    },
+    {
+      "Email": "yash@123",
+      "Password": "111",
+      "id": 11
+    },
+    {
+      "Email": "yash@123",
+      "Password": "1111",
+      "id": 12
+    },
+    {
+      "Email": "yash@123",
+      "Password": "3333",
+      "id": 13
+    }
+  ]
+}
