@@ -21,6 +21,75 @@
       "password": "123456789",
       "copassword": "123456789",
       "id": 4
+    },
+    {
+      "type": "",
+      "date": "2023-12-05",
+      "amount": "1234",
+      "desc": "123",
+      "id": 5
+    },
+    {
+      "email": "ghhj@jgo.com",
+      "password": "12345678",
+      "copassword": "12345678",
+      "id": 6
+    },
+    {
+      "email": "ghhj@jgo.com",
+      "password": "12345678",
+      "copassword": "12345678",
+      "id": 7
+    }
+  ],
+  "expense": [
+    {
+      "type": "Card",
+      "date": "2023-12-05",
+      "amount": "1234",
+      "desc": "123",
+      "id": 2
+    },
+    {
+      "type": "Card",
+      "date": "2023-12-05",
+      "amount": "1234",
+      "desc": "123",
+      "id": 3
+    },
+    {
+      "type": "Cash",
+      "date": "2023-12-05",
+      "amount": "1234",
+      "desc": "123",
+      "editMode": true,
+      "editIndex": 0,
+      "id": 4
+    },
+    {
+      "type": "Cash",
+      "date": "2023-12-05",
+      "amount": "1234678",
+      "desc": "123",
+      "editMode": true,
+      "editIndex": 1,
+      "id": 5
+    },
+    {
+      "type": "Card",
+      "date": "2023-12-05",
+      "amount": "1234678",
+      "desc": "shopping",
+      "id": 6
+    },
+    {
+      "type": "Cash",
+      "date": "2023-12-31",
+      "amount": "1234",
+      "desc": "123",
+      "editMode": true,
+      "editIndex": 0,
+      "id": 7
     }
   ]
 }

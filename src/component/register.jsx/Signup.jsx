@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import './Signup.css'
 import { addUser, fetchUser } from '../../redux/action.jsx/action'
+import { useNavigate } from 'react-router-dom'
 
 const userInfo = (state)=> state.user
 
 function Signup() {
   const data = useSelector(userInfo)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [form,setForm] = useState({
     email : "",
     password : "",
@@ -70,6 +72,7 @@ function Signup() {
       copassword:''
      })
      dispatch(addUser(form))
+     navigate("/expenselist")
     }
    }
   return (

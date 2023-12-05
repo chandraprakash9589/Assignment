@@ -28,6 +28,13 @@ export const fetchrequest = ()=>{
     type : 'fetchuser'
   }
 }
+export const LoginRequest=(logindata)=>{
+  console.log(logindata)
+  return{
+    type : 'login',
+    payload : logindata
+  }
+}
 
 export const fetchUser = (data)=>{
   return (dispatch)=>{
@@ -38,3 +45,61 @@ export const fetchUser = (data)=>{
    })
   }
  }
+
+//  expense start
+
+export const fetchexp = ()=>{
+  return{
+    type  : 'fetchexpense',
+  
+  }
+}
+
+export const expensesuccess = (data)=>{
+  return {
+    type : "expensesucees",
+    payload : data
+  }
+}
+
+export const addexpense = (data)=>{
+  return{
+    type  : 'addexpense',
+    payload : data
+  }
+}
+
+export const deleteexpense = (id)=>{
+  return {
+    type : 'deleteexpense',
+    payload : id
+  }
+}
+
+export const updateexpense = (id)=>{
+  return {
+    type : 'updateexpense',
+    payload : id
+  }
+}
+
+export const expenseSearch = (data)=>{
+   return {
+    type : "search",
+    payload : data
+   }
+}
+
+export const expenseSearchType = (data)=>{  
+  return {
+   type : "searchType",
+   payload : data
+  }
+}
+
+export const expenseSearchYear = (data)=>{ 
+  return {
+   type : "searchYear",
+   payload : data
+  }
+}
