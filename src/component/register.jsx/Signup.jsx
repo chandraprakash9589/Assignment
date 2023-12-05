@@ -69,7 +69,7 @@ function Signup() {
       setForm({
       email:'',
       password:'',
-      copassword:''
+      copassword:''git 
      })
      dispatch(addUser(form))
      navigate("/expenselist")
