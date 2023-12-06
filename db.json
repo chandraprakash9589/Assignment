@@ -1,0 +1,44 @@
+{
+  "todos": [
+    {
+      "title": "title 1",
+      "description": "des 1",
+      "id": 1,
+      "read": true
+    },
+    {
+      "title": "title 2",
+      "description": "des 2",
+      "id": 2,
+      "read": true
+    },
+    {
+      "title": "title 3",
+      "description": "des 3",
+      "id": 3,
+      "read": true
+    },
+    {
+      "title": "title 4",
+      "description": "des 4",
+      "id": 4
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

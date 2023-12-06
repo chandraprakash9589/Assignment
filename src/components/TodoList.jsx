@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 export default function TodoForm(props) {
   const { addTodoHandler, editTodoHandler, editingTodo, handleCloseEditModal } =
     props;
-  const [title, setTitle] = useState("this is title 1");
-  const [description, setDescription] = useState("this is description 1");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [addData, setAddData] = useState(false);
   const [updatedData, setUpdatedData] = useState(false);
   const [error, setError] = useState({});
@@ -24,11 +24,12 @@ export default function TodoForm(props) {
   let isValid = true;
   const validateCheck = () => {
     const newError = {};
-    if (!title.trim()) {
+
+    if (!title || !title.trim()) {
       newError.title = " - Invalid Title";
       isValid = false;
     }
-    if (!description.trim()) {
+    if (!description || !description.trim()) {
       newError.description = "- Invalid Description";
       isValid = false;
     }
@@ -43,13 +44,11 @@ export default function TodoForm(props) {
         editTodoHandler(
           editingTodo.index,
           { title, description },
+          );
           setUpdatedData(true)
-        );
         // handleCloseEditModal();
       } else {
         addTodoHandler({ title, description });
-        setTitle(" this is title 2");
-        setDescription(" this is description 2");
         setAddData(true);
       }
     }
@@ -75,7 +74,10 @@ export default function TodoForm(props) {
                 name="title"
                 required
                 value={title}
-                onChange={(event) => inputChange(setTitle(event.target.value))}
+                onChange={(event) => {
+                  inputChange(event);
+                  setTitle(event.target.value);
+                }}
               />
               <span className="text-danger">{error.title}</span>
             </InputGroup>
@@ -90,9 +92,10 @@ export default function TodoForm(props) {
                 required
                 name="description"
                 value={description}
-                onChange={(event) =>
-                  inputChange(setDescription(event.target.value))
-                }
+                onChange={(event) =>{
+                  inputChange(event);
+                  setDescription(event.target.value);
+                }}
               />
               <span className="text-danger">{error.description}</span>
             </InputGroup>

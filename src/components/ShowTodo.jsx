@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 const ShowTodo = (props) => {
   const {
     data,
+    fetchTodoHandler,
     addTodoHandler,
     editTodoHandler,
     removeTodoHandler,
@@ -18,7 +19,7 @@ const ShowTodo = (props) => {
   const [editingTodo, setEditingTodo] = useState(null);
 
   const handleEditTodo = (index) => {
-    setEditingTodo({ index, data: data[index].list });
+    setEditingTodo({ index, data: data[index]});
     setShowEditModal(true);
   };
 
@@ -26,6 +27,10 @@ const ShowTodo = (props) => {
     setEditingTodo(null);
     setShowEditModal(false);
   };
+  useEffect(() => {
+    // Fetch data when the component mounts
+    fetchTodoHandler();
+  }, [fetchTodoHandler]);
 
   return (
     <>
@@ -54,8 +59,8 @@ const ShowTodo = (props) => {
               data.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item.list.title}</td>
-                  <td>{item.list.description}</td>
+                  <td>{item.title}</td>
+                  <td>{item.description}</td>
                   <td className="text-center">
                     <>
                       <Button
