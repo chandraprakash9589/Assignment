@@ -1,0 +1,81 @@
+{
+  "expenses": [
+    {
+      "expenseType": "cash",
+      "expenseDate": "2023-12-09",
+      "expenseAmount": "1200",
+      "expenseDes": "shopping",
+      "id": 1
+    },
+    {
+      "expenseType": "card",
+      "expenseDate": "2023-12-02",
+      "expenseAmount": "1100",
+      "expenseDes": "Travel",
+      "id": 2
+    },
+    {
+      "expenseType": "card",
+      "expenseDate": "2023-12-02",
+      "expenseAmount": "900",
+      "expenseDes": "Food",
+      "id": 3
+    },
+    {
+      "expenseType": "cash",
+      "expenseDate": "2023-12-03",
+      "expenseAmount": "3233",
+      "expenseDes": "Food",
+      "id": 4
+    },
+    {
+      "expenseType": "cash",
+      "expenseDate": "2023-12-22",
+      "expenseAmount": "1200",
+      "expenseDes": "dance",
+      "id": 5
+    },
+    {
+      "expenseType": "cash",
+      "expenseDate": "2023-12-01",
+      "expenseAmount": "2200",
+      "expenseDes": "Mobile purchase",
+      "id": 6
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "email": "user1@gmail.com",
+      "password": "user1",
+      "cpassword": "user1",
+      "id": 1
+    },
+    {
+      "email": "user2@gmail.com",
+      "password": "user2",
+      "cpassword": "user2",
+      "id": 2
+    },
+    {
+      "email": "user3@gmail.com",
+      "password": "user3",
+      "cpassword": "user3",
+      "id": 3
+    },
+    {
+      "email": "user4@gmail.com",
+      "password": "user4",
+      "cpassword": "user4",
+      "id": 4
+    },
+    {
+      "email": "user5@gmail.com",
+      "password": "user5",
+      "cpassword": "user5",
+      "id": 5
+    }
+  ]
+}
